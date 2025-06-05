@@ -15,7 +15,6 @@ import sistemainventario.controller.ProductoController;
 import sistemainventario.dto.CategoriaDTO;
 import sistemainventario.dto.ProductoDTO;
 import sistemainventario.dto.UsuarioDTO;
-import sistemainventario.model.Categoria;
 import sistemainventario.util.Sesion;
 
 public final class ProductosView extends javax.swing.JFrame {
@@ -36,7 +35,7 @@ public final class ProductosView extends javax.swing.JFrame {
         cargarCategorias();
         cargarProductos(productos);
         //Codigo para el ver el Enter y el Escape
-        getRootPane().setDefaultButton(null);
+        getRootPane().setDefaultButton(btnBuscar);
         
         getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
             .put(KeyStroke.getKeyStroke("ESCAPE"), "cerrar");
@@ -83,7 +82,6 @@ public final class ProductosView extends javax.swing.JFrame {
         txtMarca = new javax.swing.JTextField();
         lblCategoria = new javax.swing.JLabel();
         txtProcedencia = new javax.swing.JTextField();
-        cboCategoria = new javax.swing.JComboBox<>();
         txtPeso = new javax.swing.JTextField();
         txtStockInicial = new javax.swing.JTextField();
         txtStockMinimo = new javax.swing.JTextField();
@@ -93,9 +91,11 @@ public final class ProductosView extends javax.swing.JFrame {
         lblStockMinimo = new javax.swing.JLabel();
         lblPeso = new javax.swing.JLabel();
         chkEstado = new javax.swing.JCheckBox();
-        btnBuscar = new javax.swing.JLabel();
+        cboCategoria = new javax.swing.JComboBox<>();
         txtBuscar = new javax.swing.JTextField();
         lblCodigo1 = new javax.swing.JLabel();
+        cboCriterio = new javax.swing.JComboBox<>();
+        btnBuscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -409,11 +409,6 @@ public final class ProductosView extends javax.swing.JFrame {
         txtProcedencia.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jpDatos.add(txtProcedencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, 260, 34));
 
-        cboCategoria.setBackground(new java.awt.Color(255, 255, 255));
-        cboCategoria.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        cboCategoria.setForeground(new java.awt.Color(51, 51, 51));
-        jpDatos.add(cboCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 50, 260, 34));
-
         txtPeso.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jpDatos.add(txtPeso, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 210, 166, 34));
 
@@ -448,23 +443,30 @@ public final class ProductosView extends javax.swing.JFrame {
         chkEstado.setText("Estado");
         jpDatos.add(chkEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 290, 110, 30));
 
-        btnBuscar.setBackground(new java.awt.Color(255, 255, 255));
-        btnBuscar.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
-        btnBuscar.setForeground(new java.awt.Color(255, 255, 255));
-        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sistemainventario/resources/images/newProducto.png"))); // NOI18N
-        btnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnBuscar.setIconTextGap(50);
-        btnBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnBuscarMouseClicked(evt);
-            }
-        });
+        cboCategoria.setBackground(new java.awt.Color(255, 255, 255));
+        cboCategoria.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        cboCategoria.setForeground(new java.awt.Color(51, 51, 51));
+        jpDatos.add(cboCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 50, 260, 34));
 
         txtBuscar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         lblCodigo1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblCodigo1.setForeground(new java.awt.Color(0, 153, 255));
         lblCodigo1.setText("Buscar");
+
+        cboCriterio.setBackground(new java.awt.Color(255, 255, 255));
+        cboCriterio.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cboCriterio.setForeground(new java.awt.Color(51, 51, 51));
+        cboCriterio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Descripcion", "Categoria", "Marca", "Procedencia", "Codigo" }));
+
+        btnBuscar.setBackground(new java.awt.Color(255, 255, 255));
+        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sistemainventario/resources/images/buscar.png"))); // NOI18N
+        btnBuscar.setOpaque(false);
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jpContainerLayout = new javax.swing.GroupLayout(jpContainer);
         jpContainer.setLayout(jpContainerLayout);
@@ -475,14 +477,16 @@ public final class ProductosView extends javax.swing.JFrame {
                 .addGroup(jpContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpContainerLayout.createSequentialGroup()
                         .addComponent(btnNuevo)
-                        .addGap(95, 95, 95)
-                        .addComponent(lblCodigo1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtBuscar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addComponent(jpDatos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 790, Short.MAX_VALUE)))
+                        .addComponent(lblCodigo1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cboCriterio, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(107, 107, 107))
+                    .addComponent(jpDatos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
             .addGroup(jpContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jpContainerLayout.createSequentialGroup()
                     .addContainerGap()
@@ -493,13 +497,14 @@ public final class ProductosView extends javax.swing.JFrame {
             jpContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpContainerLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jpContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jpContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnNuevo)
-                    .addComponent(btnBuscar)
                     .addGroup(jpContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblCodigo1)))
-                .addGap(231, 231, 231)
+                        .addComponent(lblCodigo1)
+                        .addComponent(cboCriterio, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(240, 240, 240)
                 .addComponent(jpDatos, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jpContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -664,9 +669,11 @@ public final class ProductosView extends javax.swing.JFrame {
         cboCategoria.setSelectedIndex(0);
     }//GEN-LAST:event_btnRefreshCategoriaMouseClicked
 
-    private void btnBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseClicked
-        cargarProductos(buscarProducto(txtBuscar.getText()));
-    }//GEN-LAST:event_btnBuscarMouseClicked
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        String criterioBusqueda=cboCriterio.getSelectedItem().toString();
+        String valorBuscado=txtBuscar.getText();
+        cargarProductos(buscarProducto(valorBuscado, criterioBusqueda));
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
     public void cargaDatos() {
         UsuarioDTO u = Sesion.getUsuario();
@@ -772,20 +779,35 @@ public final class ProductosView extends javax.swing.JFrame {
         .orElse(null);
     }
     
-    private List<ProductoDTO> buscarProducto(String valorBuscardo){
-        List<ProductoDTO> productosFiltrado;
-        if(valorBuscardo.equals("")){
-            return productos;                        
-        }else{
-            productosFiltrado=this.productos.stream()
-                            .filter(p -> p.toString().toLowerCase().contains(valorBuscardo.toLowerCase()))
-                            .collect(Collectors.toList());
-            return productosFiltrado;
+    private List<ProductoDTO> buscarProducto(String valorBuscado, String criterioBusqueda) {
+        if (valorBuscado == null || valorBuscado.isEmpty()) {
+            return productos;
         }
+
+        String valor = valorBuscado.toLowerCase();
+
+        return productos.stream()
+                .filter(p -> {
+                    switch (criterioBusqueda.toLowerCase()) {
+                        case "descripcion":
+                            return p.getDescripcion().toLowerCase().contains(valor);
+                        case "categoria":
+                            return p.getCategoria().getNombre().toLowerCase().contains(valor);
+                        case "marca":
+                            return p.getMarca().toLowerCase().contains(valor);
+                        case "procedencia":
+                            return p.getProcedencia().toLowerCase().contains(valor);
+                        case "codigo":
+                            return p.getCodigo().toLowerCase().contains(valor);
+                        default:
+                            return false;
+                    }
+                })
+                .collect(Collectors.toList());
     }
  
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel btnBuscar;
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JLabel btnCancelar;
     private javax.swing.JLabel btnCategoria;
     private javax.swing.JLabel btnEditar;
@@ -797,6 +819,7 @@ public final class ProductosView extends javax.swing.JFrame {
     private javax.swing.JLabel btnRefreshCategoria;
     private javax.swing.JLabel btnRegresar;
     private javax.swing.JComboBox<String> cboCategoria;
+    private javax.swing.JComboBox<String> cboCriterio;
     private javax.swing.JCheckBox chkEstado;
     private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JPanel jpAction;
