@@ -35,11 +35,24 @@ public class ProductoController {
         try {
             productoService.actualizar(producto);
             Mensajes.info("Se guardo los cambios Correctamente");
+            return true;
         } catch (Exception e) {
+            Mensajes.errorValidaciones(e);
+            return false;
         }
-        return false;}
+    }
     
     public boolean eliminarProducto(int id){
-        return false;
+        try {
+            if (Mensajes.confirmar("Seguro que desea eliminar el Producto")==0){
+                productoService.eliminar(id);            
+                Mensajes.info("Se elimino correctamente el Producto");
+                return true;
+            }
+            return false;
+        } catch (Exception e) {
+            Mensajes.errorValidaciones(e);
+            return false;
+        }        
     }
 }

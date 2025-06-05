@@ -49,8 +49,9 @@ public class CategoriaController {
             if (Mensajes.confirmar("Seguro que desea eliminar la Categoria")==0){
                 categoriaService.eliminar(id);            
                 Mensajes.info("Se elimino correctamente el usuario");
+                return true;
             }
-            return true;
+            return false;
         } catch (Exception e) {
             Mensajes.errorValidaciones(e);
             return false;

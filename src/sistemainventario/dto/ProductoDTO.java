@@ -17,11 +17,12 @@ public class ProductoDTO {
     private Date fechaRegistro;
     private Date fechaActualizado;
     private String estado;
+    private UsuarioDTO usuario;
 
     public ProductoDTO() {
     }
 
-    public ProductoDTO(int id, String codigo, CategoriaDTO categoria, String descripcion, String marca, String procedencia, String Peso, int stockInicial, int stockMinimo, String estado) {
+    public ProductoDTO(int id, String codigo, CategoriaDTO categoria, String descripcion, String marca, String procedencia, String Peso, int stockInicial, int stockActual, int stockMinimo, Date fechaRegistro, Date fechaActualizado, String estado, UsuarioDTO usuario) {
         this.id = id;
         this.codigo = codigo;
         this.categoria = categoria;
@@ -30,10 +31,15 @@ public class ProductoDTO {
         this.procedencia = procedencia;
         this.Peso = Peso;
         this.stockInicial = stockInicial;
+        this.stockActual = stockActual;
         this.stockMinimo = stockMinimo;
+        this.fechaRegistro = fechaRegistro;
+        this.fechaActualizado = fechaActualizado;
         this.estado = estado;
+        this.usuario = usuario;
     }
 
+   
     public int getId() {
         return id;
     }
@@ -137,6 +143,20 @@ public class ProductoDTO {
     public void setEstado(String estado) {
         this.estado = estado;
     }
+
+    public UsuarioDTO getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(UsuarioDTO usuario) {
+        this.usuario = usuario;
+    }
+
+    @Override
+    public String toString() {
+        return "ProductoDTO{" + "id=" + id + ", codigo=" + codigo + ", categoria=" + categoria + ", descripcion=" + descripcion + ", marca=" + marca + ", procedencia=" + procedencia + ", Peso=" + Peso + ", stockInicial=" + stockInicial + ", stockActual=" + stockActual + ", stockMinimo=" + stockMinimo + ", fechaRegistro=" + fechaRegistro + ", fechaActualizado=" + fechaActualizado + ", estado=" + estado + ", usuario=" + usuario + '}';
+    }
+    
     
     
 }

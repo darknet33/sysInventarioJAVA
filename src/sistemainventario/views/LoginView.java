@@ -6,12 +6,14 @@ import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 import sistemainventario.controller.LoginController;
 import sistemainventario.dao.ConexionDAO;
+import sistemainventario.util.Sesion;
 
 
 public final class LoginView extends javax.swing.JFrame {
 
     public LoginView() {
         initComponents();
+        //Codigo para el ver el Enter y el Escape
         getRootPane().setDefaultButton(btnIngresar);
 
         getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
@@ -156,8 +158,12 @@ public final class LoginView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
-        LoginController ctrLogin= new LoginController(this);
-        ctrLogin.hacerLogin(txtUsuario.getText(), txtContrasenia.getText());
+        LoginController ctrLogin= new LoginController();
+        Sesion.setUsuario(ctrLogin.realizarIngreso(txtUsuario.getText(), txtContrasenia.getText()));
+        if (Sesion.getUsuario()!=null){
+            this.dispose();
+            new MainView().setVisible(true);
+        }
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -170,8 +176,6 @@ public final class LoginView extends javax.swing.JFrame {
         this.dispose();
     }
     
-    
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIngresar;
     private javax.swing.JButton btnSalir;

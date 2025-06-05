@@ -13,7 +13,7 @@ public class ProductoMapper {
         dto.setCategoria(CategoriaMapper.toDTO(model.getCategoria()));
         dto.setDescripcion(model.getDescripcion());
         dto.setMarca(model.getMarca());
-        dto.setProcedencia(model.getProcedencia());
+        dto.setProcedencia(model.getProcedencia().toUpperCase());
         dto.setPeso(model.getPeso());
         dto.setStockInicial(model.getStockInicial());
         dto.setStockActual(model.getStockActual());
@@ -23,7 +23,8 @@ public class ProductoMapper {
         }else{
             dto.setEstado("Desabilitado");
         }
-            
+        
+        dto.setUsuario(UsuarioMapper.toDTO(model.getUsuario()));
         
         return dto;
     }
@@ -36,13 +37,14 @@ public class ProductoMapper {
         model.setCategoria(CategoriaMapper.toModel(dto.getCategoria()));
         model.setDescripcion(dto.getDescripcion());
         model.setMarca(dto.getMarca());
-        model.setProcedencia(dto.getProcedencia());
+        model.setProcedencia(dto.getProcedencia().toUpperCase());
         model.setPeso(dto.getPeso());
         model.setStockInicial(dto.getStockInicial());
         model.setStockActual(dto.getStockActual());
         model.setStockMinimo(dto.getStockMinimo());
         model.setEstado(dto.getEstado().equals("Habilitado"));
-                
+        model.setUsuario(UsuarioMapper.toModel(dto.getUsuario()));
+        
         return model;
     }
 }

@@ -1,7 +1,9 @@
 package sistemainventario.views;
 
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.swing.AbstractAction;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComponent;
@@ -20,14 +22,21 @@ public final class ProductosView extends javax.swing.JFrame {
     private final CategoriaController categoriaController;
     private final ProductoController productoController;
     private ProductoDTO productoDTO=null;
+    private List<CategoriaDTO> categorias;
+    private List<ProductoDTO> productos;
     
     public ProductosView() {
         this.categoriaController=new CategoriaController();
         this.productoController=new ProductoController();
-        initComponents();
+        this.productos=productoController.listarProductos();
+        this.categorias = categoriaController.listarCategoria();
+        
+        initComponents();        
         cargaDatos();
         cargarCategorias();
-        cargarTabla();
+        cargarProductos(productos);
+        //Codigo para el ver el Enter y el Escape
+        getRootPane().setDefaultButton(null);
         
         getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
             .put(KeyStroke.getKeyStroke("ESCAPE"), "cerrar");
@@ -84,6 +93,9 @@ public final class ProductosView extends javax.swing.JFrame {
         lblStockMinimo = new javax.swing.JLabel();
         lblPeso = new javax.swing.JLabel();
         chkEstado = new javax.swing.JCheckBox();
+        btnBuscar = new javax.swing.JLabel();
+        txtBuscar = new javax.swing.JTextField();
+        lblCodigo1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -436,6 +448,24 @@ public final class ProductosView extends javax.swing.JFrame {
         chkEstado.setText("Estado");
         jpDatos.add(chkEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 290, 110, 30));
 
+        btnBuscar.setBackground(new java.awt.Color(255, 255, 255));
+        btnBuscar.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
+        btnBuscar.setForeground(new java.awt.Color(255, 255, 255));
+        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sistemainventario/resources/images/newProducto.png"))); // NOI18N
+        btnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBuscar.setIconTextGap(50);
+        btnBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnBuscarMouseClicked(evt);
+            }
+        });
+
+        txtBuscar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        lblCodigo1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblCodigo1.setForeground(new java.awt.Color(0, 153, 255));
+        lblCodigo1.setText("Buscar");
+
         javax.swing.GroupLayout jpContainerLayout = new javax.swing.GroupLayout(jpContainer);
         jpContainer.setLayout(jpContainerLayout);
         jpContainerLayout.setHorizontalGroup(
@@ -445,8 +475,14 @@ public final class ProductosView extends javax.swing.JFrame {
                 .addGroup(jpContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpContainerLayout.createSequentialGroup()
                         .addComponent(btnNuevo)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jpDatos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(95, 95, 95)
+                        .addComponent(lblCodigo1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtBuscar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addComponent(jpDatos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 790, Short.MAX_VALUE)))
             .addGroup(jpContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jpContainerLayout.createSequentialGroup()
                     .addContainerGap()
@@ -457,8 +493,13 @@ public final class ProductosView extends javax.swing.JFrame {
             jpContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpContainerLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnNuevo)
-                .addGap(234, 234, 234)
+                .addGroup(jpContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnNuevo)
+                    .addComponent(btnBuscar)
+                    .addGroup(jpContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblCodigo1)))
+                .addGap(231, 231, 231)
                 .addComponent(jpDatos, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jpContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -516,23 +557,29 @@ public final class ProductosView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCategoriaMouseClicked
     
     private void btnItemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnItemMouseClicked
+        txtBuscar.setText("");
         
+        productos=productoController.listarProductos();
+        cargarProductos(productos);
+        vista(false);
+        productoDTO=null;
     }//GEN-LAST:event_btnItemMouseClicked
 
     private void tblProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProductoMouseClicked
         int fila=tblProducto.getSelectedRow();
         int id=(Integer) tblProducto.getValueAt(fila, 0);
         productoDTO=productoController.obtenerProducto(id);
-        cboCategoria.setSelectedItem(productoDTO.getCategoria());
         vistaEditDel(true);
         cargaDTO();
     }//GEN-LAST:event_tblProductoMouseClicked
 
     private void btnGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseClicked
+        CategoriaDTO categoria = buscarCategoria(cboCategoria.getSelectedItem().toString());
+        
         if (productoDTO==null){
             productoDTO =new ProductoDTO();
-            productoDTO.setCodigo(txtCodigo.getText());
-            productoDTO.setCategoria((CategoriaDTO) cboCategoria.getSelectedItem());
+            productoDTO.setCodigo(txtCodigo.getText());    
+            productoDTO.setCategoria(categoria);
             productoDTO.setDescripcion(txtDescripcion.getText());
             productoDTO.setPeso(txtPeso.getText());
             productoDTO.setProcedencia(txtProcedencia.getText());
@@ -540,35 +587,45 @@ public final class ProductosView extends javax.swing.JFrame {
             productoDTO.setStockInicial(Integer.parseInt(txtStockInicial.getText()));
             productoDTO.setStockActual(Integer.parseInt(txtStockInicial.getText()));
             productoDTO.setStockMinimo(Integer.parseInt(txtStockMinimo.getText()));
-            if (chkEstado.isSelected()){
-                productoDTO.setEstado("Si");
-            }else{
-                productoDTO.setEstado("No");
-            }
-            
-
-            if (productoController.nuevaProducto(productoDTO)){cargarTabla();}
-        }else{
-            productoDTO.setCodigo(txtCodigo.getText());
-            productoDTO.setCategoria((CategoriaDTO) cboCategoria.getSelectedItem());
-            productoDTO.setDescripcion(txtDescripcion.getText());
-            productoDTO.setPeso(txtPeso.getText());
-            productoDTO.setProcedencia(txtProcedencia.getText());
-            productoDTO.setMarca(txtMarca.getText());
-            productoDTO.setStockInicial(Integer.parseInt(txtStockInicial.getText()));
-            productoDTO.setStockMinimo(Integer.parseInt(txtStockMinimo.getText()));
+                                   
             if (chkEstado.isSelected()){
                 productoDTO.setEstado("Habilitado");
             }else{
                 productoDTO.setEstado("Desabilitado");
             }
             
-
+            productoDTO.setUsuario(Sesion.getUsuario());
+            
+            this.productos=productoController.listarProductos();
+            if (productoController.nuevaProducto(productoDTO)){
+                this.productos=productoController.listarProductos();
+                cargarProductos(productos);
+            }
+        }else{
+            productoDTO.setCodigo(txtCodigo.getText());
+            productoDTO.setCategoria(categoria);
+            productoDTO.setDescripcion(txtDescripcion.getText());
+            productoDTO.setPeso(txtPeso.getText());
+            productoDTO.setProcedencia(txtProcedencia.getText());
+            productoDTO.setMarca(txtMarca.getText());
+            productoDTO.setStockInicial(Integer.parseInt(txtStockInicial.getText()));
+            productoDTO.setStockMinimo(Integer.parseInt(txtStockMinimo.getText()));
+            
+            if (chkEstado.isSelected()){
+                productoDTO.setEstado("Habilitado");
+            }else{
+                productoDTO.setEstado("Desabilitado");
+            }
+            
+            productoDTO.setUsuario(Sesion.getUsuario());
+            
             
             if (productoController.actulizarProducto(productoDTO)){
-                cargarTabla();
+                this.productos=productoController.listarProductos();
+                cargarProductos(productos);
             }
         }
+        
         tblProducto.clearSelection();
         productoDTO=null;
 
@@ -590,7 +647,8 @@ public final class ProductosView extends javax.swing.JFrame {
 
     private void btnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseClicked
         if (productoController.eliminarProducto(productoDTO.getId())){
-            cargarTabla();
+            this.productos=productoController.listarProductos();
+            cargarProductos(this.productos);
         }
     }//GEN-LAST:event_btnEliminarMouseClicked
 
@@ -601,28 +659,31 @@ public final class ProductosView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNuevoMouseClicked
 
     private void btnRefreshCategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRefreshCategoriaMouseClicked
+        categorias=categoriaController.listarCategoria();
         cargarCategorias();
-        cboCategoria.setSelectedIndex(productoDTO.getCategoria().getId()-1);
+        cboCategoria.setSelectedIndex(0);
     }//GEN-LAST:event_btnRefreshCategoriaMouseClicked
+
+    private void btnBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseClicked
+        cargarProductos(buscarProducto(txtBuscar.getText()));
+    }//GEN-LAST:event_btnBuscarMouseClicked
 
     public void cargaDatos() {
         UsuarioDTO u = Sesion.getUsuario();
 
         lblNombreCompleto.setText(u.getNombres() + " " + u.getApellidos());
         lblRol.setText(u.getRol().getNombre());
-        lblTitulo.setText("Productos");                                             
+        lblTitulo.setText("Productos");
     } 
     
     public void cargarCategorias(){
-        List<CategoriaDTO> categorias = categoriaController.listarCategoria();
-        DefaultComboBoxModel modelo = new DefaultComboBoxModel<>();
-        categorias.forEach(categoria -> modelo.addElement(categoria));        
+        DefaultComboBoxModel<String> modelo = new DefaultComboBoxModel<>();
+        categorias.forEach(c -> modelo.addElement(c.getNombre()));        
         cboCategoria.setModel(modelo);
     }
     
-    private void cargarTabla() {
-        List<ProductoDTO> productos=productoController.listarProductos();
-        String[] columnas = {"ID", "Codigo","Categoria","Descripcion","Marca","Procedencia","Stock","Minimo","Estado"};
+    private void cargarProductos(List<ProductoDTO> listaProductos) {
+        String[] columnas = {"ID", "Codigo","Categoria","Descripcion","Marca","Minimo","Estado"};
         DefaultTableModel modelo = new DefaultTableModel(columnas, 0){
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -630,17 +691,16 @@ public final class ProductosView extends javax.swing.JFrame {
             }
         };
 
-        productos.stream()
+        listaProductos.stream()
                  .map(p -> new Object[]{p.getId(), p.getCodigo(), p.getCategoria().getNombre()
-                                        , p.getDescripcion(), p.getMarca(), p.getProcedencia()
-                                        , p.getStockActual(), p.getStockMinimo(), p.getEstado()})
+                                        , p.getDescripcion(), p.getMarca(), p.getStockMinimo(), p.getEstado()})
                  .forEach(modelo::addRow);
 
         tblProducto.setModel(modelo);
         vista(false);
     }
-    
-        private void limpiar(){
+       
+    private void limpiar(){
         txtCodigo.setText("");        
         cboCategoria.setSelectedItem(0);
         txtDescripcion.setText("");
@@ -678,7 +738,7 @@ public final class ProductosView extends javax.swing.JFrame {
     
     private void cargaDTO(){
         txtCodigo.setText(productoDTO.getCodigo());
-        cboCategoria.setSelectedIndex(productoDTO.getCategoria().getId()-1);
+        cboCategoria.setSelectedItem(productoDTO.getCategoria().getNombre());
         txtDescripcion.setText(productoDTO.getDescripcion());
         txtMarca.setText(productoDTO.getMarca());
         txtProcedencia.setText(productoDTO.getProcedencia());
@@ -697,14 +757,35 @@ public final class ProductosView extends javax.swing.JFrame {
         txtPeso.setEditable(value);
         txtStockInicial.setEditable(value);
         txtStockMinimo.setEditable(value);
+        chkEstado.setEnabled(value);
     }
     
     public void regresar(){
         this.dispose();
         new MainView().setVisible(true);
     }
+    
+    public CategoriaDTO buscarCategoria(String Nombre){
+        return categorias.stream()
+        .filter(c -> c.getNombre().equalsIgnoreCase(Nombre))
+        .findFirst()
+        .orElse(null);
+    }
+    
+    private List<ProductoDTO> buscarProducto(String valorBuscardo){
+        List<ProductoDTO> productosFiltrado;
+        if(valorBuscardo.equals("")){
+            return productos;                        
+        }else{
+            productosFiltrado=this.productos.stream()
+                            .filter(p -> p.toString().toLowerCase().contains(valorBuscardo.toLowerCase()))
+                            .collect(Collectors.toList());
+            return productosFiltrado;
+        }
+    }
  
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel btnBuscar;
     private javax.swing.JLabel btnCancelar;
     private javax.swing.JLabel btnCategoria;
     private javax.swing.JLabel btnEditar;
@@ -727,6 +808,7 @@ public final class ProductosView extends javax.swing.JFrame {
     private javax.swing.JPanel jpMenu;
     private javax.swing.JLabel lblCategoria;
     private javax.swing.JLabel lblCodigo;
+    private javax.swing.JLabel lblCodigo1;
     private javax.swing.JLabel lblDescripcion;
     private javax.swing.JLabel lblMarca;
     private javax.swing.JLabel lblNombreCompleto;
@@ -738,6 +820,7 @@ public final class ProductosView extends javax.swing.JFrame {
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblUserImg;
     private javax.swing.JTable tblProducto;
+    private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtDescripcion;
     private javax.swing.JTextField txtMarca;

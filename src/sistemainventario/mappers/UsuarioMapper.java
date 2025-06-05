@@ -8,6 +8,7 @@ public class UsuarioMapper {
     public static UsuarioDTO toDTO(Usuario model) {
         UsuarioDTO dto = new UsuarioDTO();
         
+        dto.setId(model.getId());
         dto.setUsername(model.getUsername());
         dto.setPassword(model.getPassword());
         dto.setNombres(model.getNombres());
@@ -21,7 +22,8 @@ public class UsuarioMapper {
    
     public static Usuario toModel(UsuarioDTO dto){
         Usuario model=new Usuario();
-        model.setId(0);
+        
+        model.setId(dto.getId());
         model.setUsername(dto.getUsername());
         model.setPassword(dto.getPassword());
         model.setNombres(dto.getNombres());
