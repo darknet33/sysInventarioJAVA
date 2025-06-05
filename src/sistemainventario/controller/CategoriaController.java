@@ -20,9 +20,9 @@ public class CategoriaController {
         return categoriaService.obtenerPorId(id);
     }
     
-    public boolean nuevaCategoria(String nombre){
+    public boolean nuevaCategoria(CategoriaDTO categoria){
         try {
-            categoriaService.guardar(new CategoriaDTO(nombre));
+            categoriaService.guardar(categoria);
             Mensajes.info("Se guardo la Categoria Correctamente");
             return true;
         } catch (Exception e) {

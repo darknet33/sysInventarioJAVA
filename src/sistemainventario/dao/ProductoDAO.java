@@ -16,7 +16,8 @@ public class ProductoDAO implements IDAO<Producto, Integer>{
         this.conn = ConexionDAO.getConexion();
     }
     
-    private Producto mapResultSetToModel(ResultSet rs) throws SQLException {
+    @Override
+    public Producto mapResultSetToEntity(ResultSet rs) throws SQLException {
         Producto producto = new Producto();
         producto.setId(rs.getInt("id_producto"));
         producto.setCodigo(rs.getString("codigo_producto"));
@@ -53,7 +54,7 @@ public class ProductoDAO implements IDAO<Producto, Integer>{
             stmt.setInt(1, id);
             ResultSet rs=stmt.executeQuery();
             if (rs.next()) {
-                return mapResultSetToModel(rs);
+                return mapResultSetToEntity(rs);
             }
         } catch (Exception e) {
             Mensajes.error(sql, e);
@@ -70,7 +71,7 @@ public class ProductoDAO implements IDAO<Producto, Integer>{
              ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
-                lista.add(mapResultSetToModel(rs));
+                lista.add(mapResultSetToEntity(rs));
             }
             
         } catch (SQLException e) {

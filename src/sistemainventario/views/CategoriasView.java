@@ -14,7 +14,7 @@ import sistemainventario.util.Sesion;
 
 public final class CategoriasView extends javax.swing.JFrame {
     private final CategoriaController categoriaController;
-    private static CategoriaDTO categoriaDTO;
+    private CategoriaDTO categoriaDTO;
     
     public CategoriasView() {
         this.categoriaController=new CategoriaController();
@@ -434,7 +434,9 @@ public final class CategoriasView extends javax.swing.JFrame {
 
     private void btnGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseClicked
         if (categoriaDTO==null){
-            if (categoriaController.nuevaCategoria(txtNombre.getText())){cargarTabla();}            
+            categoriaDTO=new CategoriaDTO();
+            categoriaDTO.setNombre(txtNombre.getText());
+            if (categoriaController.nuevaCategoria(categoriaDTO)){cargarTabla();}            
         }else{
             categoriaDTO.setNombre(txtNombre.getText());
             if (categoriaController.actulizarCategoria(categoriaDTO)){

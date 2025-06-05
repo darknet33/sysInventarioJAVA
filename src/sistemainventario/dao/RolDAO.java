@@ -15,7 +15,17 @@ public class RolDAO implements IDAO<Rol, Integer>{
     public RolDAO() {
         this.conn = ConexionDAO.getConexion();
     }
+    
+    @Override
+    public Rol mapResultSetToEntity(ResultSet rs) throws SQLException {
+        Rol entity = new Rol();
+        entity.setId(rs.getInt("id_rol"));
+        entity.setNombre(rs.getString("nombre_rol"));
+        entity.setPermisos(getByPermisosForRolId(rs.getInt("id_rol")));
 
+        return entity;
+    }
+    
     @Override
     public Rol getById(Integer id) {
         String sql = "SELECT * FROM roles WHERE id_rol = ?";
@@ -25,13 +35,8 @@ public class RolDAO implements IDAO<Rol, Integer>{
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
 
-            if (rs.next()) {
-                Rol rol = new Rol();
-                rol.setId(rs.getInt("id_rol"));
-                rol.setNombre(rs.getString("nombre_rol"));
-                rol.setPermisos(getByPermisosForRolId(id));
-                
-                return rol;
+            if (rs.next()) {                
+                return mapResultSetToEntity(rs);
             }
 
         } catch (SQLException e) {
@@ -50,11 +55,7 @@ public class RolDAO implements IDAO<Rol, Integer>{
              ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
-                Rol rol = new Rol();
-                rol.setId(rs.getInt("id_rol"));
-                rol.setNombre(rs.getString("nombre_rol"));
-                rol.setPermisos(getByPermisosForRolId(rol.getId()));
-                lista.add(rol);
+                lista.add(mapResultSetToEntity(rs));
             }
 
         } catch (SQLException e) {
@@ -107,4 +108,5 @@ public class RolDAO implements IDAO<Rol, Integer>{
 
         return permisos;
     }
+
 }

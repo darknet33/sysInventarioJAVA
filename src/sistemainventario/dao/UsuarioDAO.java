@@ -16,24 +16,25 @@ public class UsuarioDAO implements IDAO<Usuario,Integer>{
         this.conn = ConexionDAO.getConexion();
     }
     
-    private Usuario mapResultSetToModel(ResultSet rs) throws SQLException {
-        Usuario usuario = new Usuario();
-        usuario.setId(rs.getInt("id_usuario"));
-        usuario.setUsername(rs.getString("username_usuario"));
-        usuario.setPassword(rs.getString("password_usuario"));
-        usuario.setNombres(rs.getString("nombres_usuario"));
-        usuario.setApellidos(rs.getString("apellidos_usuario"));
-        usuario.setCargo(rs.getString("cargo_usuario"));
+    @Override
+    public Usuario mapResultSetToEntity(ResultSet rs) throws SQLException {
+        Usuario entity = new Usuario();
+        entity.setId(rs.getInt("id_usuario"));
+        entity.setUsername(rs.getString("username_usuario"));
+        entity.setPassword(rs.getString("password_usuario"));
+        entity.setNombres(rs.getString("nombres_usuario"));
+        entity.setApellidos(rs.getString("apellidos_usuario"));
+        entity.setCargo(rs.getString("cargo_usuario"));
 
         RolDAO rolDAO = new RolDAO();
         Rol rol=rolDAO.getById(rs.getInt("rol_id"));
-        usuario.setRol(rol);
+        entity.setRol(rol);
 
-        usuario.setFechaRegistro(rs.getTimestamp("f_registro_usuario"));
-        usuario.setFechaActualizado(rs.getTimestamp("f_actualizado_usuario"));
-        usuario.setEstado(rs.getBoolean("estado_usuario"));
+        entity.setFechaRegistro(rs.getTimestamp("f_registro_usuario"));
+        entity.setFechaActualizado(rs.getTimestamp("f_actualizado_usuario"));
+        entity.setEstado(rs.getBoolean("estado_usuario"));
 
-        return usuario;
+        return entity;
     }
     
     @Override
@@ -45,7 +46,7 @@ public class UsuarioDAO implements IDAO<Usuario,Integer>{
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {                
-                return mapResultSetToModel(rs);
+                return mapResultSetToEntity(rs);
             }
             
         } catch (SQLException e) {
@@ -65,7 +66,7 @@ public class UsuarioDAO implements IDAO<Usuario,Integer>{
              ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
-                lista.add(mapResultSetToModel(rs));
+                lista.add(mapResultSetToEntity(rs));
             }
             
         } catch (SQLException e) {
@@ -132,7 +133,7 @@ public class UsuarioDAO implements IDAO<Usuario,Integer>{
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-                return mapResultSetToModel(rs);
+                return mapResultSetToEntity(rs);
             }
             
         } catch (SQLException e) {
@@ -150,7 +151,7 @@ public class UsuarioDAO implements IDAO<Usuario,Integer>{
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-                return mapResultSetToModel(rs);
+                return mapResultSetToEntity(rs);
             }
             
         } catch (SQLException e) {

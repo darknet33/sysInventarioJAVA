@@ -4,7 +4,6 @@ import java.util.List;
 import sistemainventario.dao.UsuarioDAO;
 import sistemainventario.dto.UsuarioDTO;
 import sistemainventario.mappers.UsuarioMapper;
-import sistemainventario.model.Usuario;
 import sistemainventario.validator.UsuarioValidator;
 
 public class UsuarioService implements IService<UsuarioDTO, Integer>{

@@ -12,7 +12,16 @@ public class CategoriaDAO implements IDAO<Categoria,Integer>{
     public CategoriaDAO() {
         this.conn = ConexionDAO.getConexion();
     }
-    
+
+    @Override
+    public Categoria mapResultSetToEntity(ResultSet rs) throws SQLException {
+        Categoria entity = new Categoria();
+        entity.setId(rs.getInt("id_usuario"));
+        entity.setNombre(rs.getString("nombre_categoria"));
+
+        return entity;
+    }
+
     @Override
     public Categoria getById(Integer id) {
         String sql = "SELECT * FROM categorias WHERE id_categoria = ?";
@@ -21,12 +30,8 @@ public class CategoriaDAO implements IDAO<Categoria,Integer>{
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
 
-            if (rs.next()) {
-                Categoria c = new Categoria();
-                c.setId(rs.getInt("id_categoria"));
-                c.setNombre(rs.getString("nombre_categoria"));
-                
-                return c;
+            if (rs.next()) {                
+                return mapResultSetToEntity(rs);
             }
             
         } catch (SQLException e) {
@@ -46,10 +51,7 @@ public class CategoriaDAO implements IDAO<Categoria,Integer>{
              ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
-                Categoria c = new Categoria();
-                c.setId(rs.getInt("id_categoria"));
-                c.setNombre(rs.getString("nombre_categoria"));
-                lista.add(c);
+                lista.add(mapResultSetToEntity(rs));
             }
             
         } catch (SQLException e) {
@@ -81,7 +83,7 @@ public class CategoriaDAO implements IDAO<Categoria,Integer>{
             stmt.setString(1, entity.getNombre());
             stmt.setInt(2, entity.getId());
 
-            int filas = stmt.executeUpdate(); // Mejor que execute()
+            int filas = stmt.executeUpdate(); 
 
             if (filas == 0) {
                 System.out.println("No se actualizó ninguna fila. ¿ID inexistente?");
@@ -102,5 +104,6 @@ public class CategoriaDAO implements IDAO<Categoria,Integer>{
             Mensajes.error(sql, e);
         }
     }
+
     
 }
