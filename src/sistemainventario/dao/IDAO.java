@@ -3,7 +3,7 @@ package sistemainventario.dao;
 import java.util.List;
 
 
-public interface BaseDAO<T, ID> {
+public interface IDAO<T, ID> {
     T getById(ID id);
     List<T> getAll();
     void save(T entity);

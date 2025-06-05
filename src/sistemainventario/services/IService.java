@@ -2,7 +2,7 @@ package sistemainventario.services;
 
 import java.util.List;
 
-public interface BaseService<T, ID> {
+public interface IService<T, ID> {
     T obtenerPorId(ID id);
     List<T> listarTodos();
     void guardar(T dto);

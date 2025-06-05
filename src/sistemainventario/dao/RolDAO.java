@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class RolDAO implements BaseDAO<Rol, Integer>{
+public class RolDAO implements IDAO<Rol, Integer>{
     private final Connection conn;
     
     public RolDAO() {

@@ -9,7 +9,7 @@ import sistemainventario.model.Usuario;
 import sistemainventario.util.Mensajes;
 
 
-public class ProductoDAO implements BaseDAO<Producto, Integer>{
+public class ProductoDAO implements IDAO<Producto, Integer>{
     private final Connection conn;
     
     public ProductoDAO() {

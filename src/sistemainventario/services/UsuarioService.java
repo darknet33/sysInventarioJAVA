@@ -7,35 +7,36 @@ import sistemainventario.mappers.UsuarioMapper;
 import sistemainventario.model.Usuario;
 import sistemainventario.validator.UsuarioValidator;
 
-public class UsuarioService implements BaseService<UsuarioDTO, Integer>{
+public class UsuarioService implements IService<UsuarioDTO, Integer>{
 
     private final UsuarioDAO usuarioDAO;
-
+    private final UsuarioMapper usuarioMapper;
     public UsuarioService() {
         this.usuarioDAO = new UsuarioDAO();
+        this.usuarioMapper= new UsuarioMapper();
     }
 
     @Override
     public UsuarioDTO obtenerPorId(Integer id) {
-        return UsuarioMapper.toDTO(usuarioDAO.getById(id));
+        return usuarioMapper.toDTO(usuarioDAO.getById(id));
     }
 
     @Override
     public List<UsuarioDTO> listarTodos() {
         return usuarioDAO.getAll()
                  .stream()
-                 .map(UsuarioMapper::toDTO)
+                 .map(usuarioMapper::toDTO)
                  .toList();
     }
 
     @Override
     public void guardar(UsuarioDTO dto) {
-        usuarioDAO.save(UsuarioMapper.toModel(dto));
+        usuarioDAO.save(usuarioMapper.toEntity(dto));
     }
 
     @Override
     public void actualizar(UsuarioDTO dto) {
-        usuarioDAO.update(UsuarioMapper.toModel(dto));
+        usuarioDAO.update(usuarioMapper.toEntity(dto));
     }
 
     @Override
@@ -44,9 +45,9 @@ public class UsuarioService implements BaseService<UsuarioDTO, Integer>{
     }
     
     public UsuarioDTO login(String username,String password) {
-        UsuarioValidator.validarLogin(username, password); 
+        UsuarioValidator.validarLogin(username, password);
         
-        Usuario usuario = usuarioDAO.getByUsername(username);
+        UsuarioDTO usuario = usuarioMapper.toDTO(usuarioDAO.getByUsername(username));
         if (usuario == null) 
             throw new IllegalArgumentException("El usuario es Incorrecto.");
         
@@ -56,7 +57,7 @@ public class UsuarioService implements BaseService<UsuarioDTO, Integer>{
         if (usuario.getEstado()==false)
             throw new IllegalArgumentException("El usuario esta Inhabilitado");
         
-        return UsuarioMapper.toDTO(usuario);
+        return usuario;
     }
     
     public void cambiarEstado(int id){

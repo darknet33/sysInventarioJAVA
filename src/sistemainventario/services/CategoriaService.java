@@ -6,36 +6,38 @@ import sistemainventario.dto.CategoriaDTO;
 import sistemainventario.mappers.CategoriaMapper;
 import sistemainventario.validator.CategoriaValidator;
 
-public class CategoriaService implements BaseService<CategoriaDTO, Integer>{
+public class CategoriaService implements IService<CategoriaDTO, Integer>{
     private final CategoriaDAO categoriaDAO;
+    private final CategoriaMapper categoriaMapper;
     
     public CategoriaService() {
         this.categoriaDAO = new CategoriaDAO();
+        this.categoriaMapper =new CategoriaMapper();
     }
     
     @Override
     public CategoriaDTO obtenerPorId(Integer id) {
-        return CategoriaMapper.toDTO(categoriaDAO.getById(id));
+        return categoriaMapper.toDTO(categoriaDAO.getById(id));
     }
 
     @Override
     public List<CategoriaDTO> listarTodos() {
         return categoriaDAO.getAll()
                             .stream()
-                            .map(CategoriaMapper::toDTO)
+                            .map(categoriaMapper::toDTO)
                             .toList();
     }
 
     @Override
     public void guardar(CategoriaDTO dto) {
         CategoriaValidator.validar(dto);
-        categoriaDAO.save(CategoriaMapper.toModel(dto));
+        categoriaDAO.save(categoriaMapper.toEntity(dto));
     }
 
     @Override
     public void actualizar(CategoriaDTO dto) {
         CategoriaValidator.validar(dto);
-        categoriaDAO.update(CategoriaMapper.toModel(dto)); 
+        categoriaDAO.update(categoriaMapper.toEntity(dto)); 
     }
 
     @Override

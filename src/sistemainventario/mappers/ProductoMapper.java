@@ -1,16 +1,20 @@
 package sistemainventario.mappers;
 
+import java.util.List;
 import sistemainventario.dto.ProductoDTO;
 import sistemainventario.model.Producto;
 
-public class ProductoMapper {
-        
-    public static ProductoDTO toDTO(Producto model){
+public class ProductoMapper implements IMapper<Producto, ProductoDTO>{
+    private final CategoriaMapper categoriaMapper = new CategoriaMapper();
+    private final UsuarioMapper usuarioMapper = new UsuarioMapper();
+    
+    @Override    
+    public ProductoDTO toDTO(Producto model){
         ProductoDTO dto=new ProductoDTO();
         
         dto.setId(model.getId());
         dto.setCodigo(model.getCodigo());
-        dto.setCategoria(CategoriaMapper.toDTO(model.getCategoria()));
+        dto.setCategoria(categoriaMapper.toDTO(model.getCategoria()));
         dto.setDescripcion(model.getDescripcion());
         dto.setMarca(model.getMarca());
         dto.setProcedencia(model.getProcedencia().toUpperCase());
@@ -24,17 +28,18 @@ public class ProductoMapper {
             dto.setEstado("Desabilitado");
         }
         
-        dto.setUsuario(UsuarioMapper.toDTO(model.getUsuario()));
+        dto.setUsuario(usuarioMapper.toDTO(model.getUsuario()));
         
         return dto;
     }
     
-    public static Producto toModel(ProductoDTO dto){
+    @Override
+    public Producto toEntity(ProductoDTO dto){
         Producto model=new Producto();
         
         model.setId(dto.getId());
         model.setCodigo(dto.getCodigo());
-        model.setCategoria(CategoriaMapper.toModel(dto.getCategoria()));
+        model.setCategoria(categoriaMapper.toEntity(dto.getCategoria()));
         model.setDescripcion(dto.getDescripcion());
         model.setMarca(dto.getMarca());
         model.setProcedencia(dto.getProcedencia().toUpperCase());
@@ -43,8 +48,18 @@ public class ProductoMapper {
         model.setStockActual(dto.getStockActual());
         model.setStockMinimo(dto.getStockMinimo());
         model.setEstado(dto.getEstado().equals("Habilitado"));
-        model.setUsuario(UsuarioMapper.toModel(dto.getUsuario()));
+        model.setUsuario(usuarioMapper.toEntity(dto.getUsuario()));
         
         return model;
+    }
+
+    @Override
+    public List<ProductoDTO> toDTOList(List<Producto> entities) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<Producto> toEntityList(List<ProductoDTO> dtos) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

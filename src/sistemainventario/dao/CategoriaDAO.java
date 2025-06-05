@@ -6,7 +6,7 @@ import java.util.List;
 import sistemainventario.model.Categoria;
 import sistemainventario.util.Mensajes;
 
-public class CategoriaDAO implements BaseDAO<Categoria,Integer>{
+public class CategoriaDAO implements IDAO<Categoria,Integer>{
     private final Connection conn;
 
     public CategoriaDAO() {

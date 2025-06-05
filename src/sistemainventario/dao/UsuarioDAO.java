@@ -9,7 +9,7 @@ import java.util.List;
 import sistemainventario.util.Mensajes;
 
 
-public class UsuarioDAO implements BaseDAO<Usuario,Integer>{
+public class UsuarioDAO implements IDAO<Usuario,Integer>{
     private final Connection conn;
 
     public UsuarioDAO() {
