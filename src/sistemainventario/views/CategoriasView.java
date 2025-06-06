@@ -3,7 +3,6 @@ package sistemainventario.views;
 import java.awt.event.ActionEvent;
 import java.util.List;
 import javax.swing.AbstractAction;
-import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 import javax.swing.table.DefaultTableModel;
@@ -13,21 +12,22 @@ import sistemainventario.controller.CategoriaController;
 import sistemainventario.util.Sesion;
 
 public final class CategoriasView extends javax.swing.JFrame {
+
     private final CategoriaController categoriaController;
     private CategoriaDTO categoriaDTO;
-    
+
     public CategoriasView() {
-        this.categoriaController=new CategoriaController();
+        this.categoriaController = new CategoriaController();
         initComponents();
         cargaDatos();
-        
+
         getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-            .put(KeyStroke.getKeyStroke("ESCAPE"), "cerrar");
+                .put(KeyStroke.getKeyStroke("ESCAPE"), "cerrar");
 
         getRootPane().getActionMap().put("cerrar", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                regresar(); 
+                regresar();
             }
         });
     }
@@ -75,6 +75,7 @@ public final class CategoriasView extends javax.swing.JFrame {
         btnProductos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnProductos.setIconTextGap(50);
 
+        btnCategoria.setBackground(new java.awt.Color(0, 102, 204));
         btnCategoria.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
         btnCategoria.setForeground(new java.awt.Color(255, 255, 255));
         btnCategoria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sistemainventario/resources/images/Categorias.png"))); // NOI18N
@@ -82,6 +83,7 @@ public final class CategoriasView extends javax.swing.JFrame {
         btnCategoria.setToolTipText("");
         btnCategoria.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCategoria.setIconTextGap(50);
+        btnCategoria.setOpaque(true);
         btnCategoria.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnCategoriaMouseClicked(evt);
@@ -418,8 +420,7 @@ public final class CategoriasView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
-        this.dispose();
-        new MainView().setVisible(true);
+        regresar();
     }//GEN-LAST:event_btnRegresarMouseClicked
 
     private void btnCategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCategoriaMouseClicked
@@ -429,39 +430,41 @@ public final class CategoriasView extends javax.swing.JFrame {
 
     private void btnNuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoMouseClicked
         vistaGuardar(true);
-        limpiar();        
+        limpiar();
     }//GEN-LAST:event_btnNuevoMouseClicked
 
     private void btnGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseClicked
-        if (categoriaDTO==null){
-            categoriaDTO=new CategoriaDTO();
+        if (categoriaDTO == null) {
+            categoriaDTO = new CategoriaDTO();
             categoriaDTO.setNombre(txtNombre.getText());
-            if (categoriaController.nuevaCategoria(categoriaDTO)){cargarTabla();}            
-        }else{
+            if (categoriaController.nuevaCategoria(categoriaDTO)) {
+                cargarTabla();
+            }
+        } else {
             categoriaDTO.setNombre(txtNombre.getText());
-            if (categoriaController.actulizarCategoria(categoriaDTO)){
+            if (categoriaController.actulizarCategoria(categoriaDTO)) {
                 cargarTabla();
             }
         }
         tblCategoria.clearSelection();
-        categoriaDTO=null;
-                
+        categoriaDTO = null;
+
     }//GEN-LAST:event_btnGuardarMouseClicked
 
     private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
-        if(categoriaDTO==null){
+        if (categoriaDTO == null) {
             vista(false);
             tblCategoria.clearSelection();
-        }else{
+        } else {
             cargaDTO();
-            vistaEditDel(true);            
+            vistaEditDel(true);
         }
     }//GEN-LAST:event_btnCancelarMouseClicked
 
     private void tblCategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCategoriaMouseClicked
-        int fila=tblCategoria.getSelectedRow();
-        int id=(Integer) tblCategoria.getValueAt(fila, 0);
-        categoriaDTO=categoriaController.obtenerCategoria(id);
+        int fila = tblCategoria.getSelectedRow();
+        int id = (Integer) tblCategoria.getValueAt(fila, 0);
+        categoriaDTO = categoriaController.obtenerCategoria(id);
         vistaEditDel(true);
         cargaDTO();
     }//GEN-LAST:event_tblCategoriaMouseClicked
@@ -471,7 +474,7 @@ public final class CategoriasView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditarMouseClicked
 
     private void btnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseClicked
-        if (categoriaController.eliminarCategoria(categoriaDTO.getId())){
+        if (categoriaController.eliminarCategoria(categoriaDTO.getId())) {
             cargarTabla();
         }
     }//GEN-LAST:event_btnEliminarMouseClicked
@@ -481,20 +484,20 @@ public final class CategoriasView extends javax.swing.JFrame {
         new ProductosView().setVisible(true);
     }//GEN-LAST:event_btnItemMouseClicked
 
-    private void cargaDatos(){
-        UsuarioDTO u=Sesion.getUsuario();
-        
-        lblNombreCompleto.setText(u.getNombres()+ " " +u.getApellidos());
+    private void cargaDatos() {
+        UsuarioDTO u = Sesion.getUsuario();
+
+        lblNombreCompleto.setText(u.getNombres() + " " + u.getApellidos());
         lblRol.setText(u.getRol().getNombre());
         lblTitulo.setText("Categorias");
-        
+
         cargarTabla();
     }
-    
+
     private void cargarTabla() {
-        List<CategoriaDTO> categorias=categoriaController.listarCategoria();
+        List<CategoriaDTO> categorias = categoriaController.listarCategoria();
         String[] columnas = {"ID", "Nombre"};
-        DefaultTableModel modelo = new DefaultTableModel(columnas, 0){
+        DefaultTableModel modelo = new DefaultTableModel(columnas, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false; // Todas las celdas no editables
@@ -502,44 +505,50 @@ public final class CategoriasView extends javax.swing.JFrame {
         };
 
         categorias.stream()
-                 .map(c -> new Object[]{c.getId(), c.getNombre()})
-                 .forEach(modelo::addRow);
+                .map(c -> new Object[]{c.getId(), c.getNombre()})
+                .forEach(modelo::addRow);
 
         tblCategoria.setModel(modelo);
         vista(false);
     }
-    
-    private void limpiar(){
+
+    private void limpiar() {
         txtNombre.setText("");
-        
-        categoriaDTO=null;
+
+        categoriaDTO = null;
         tblCategoria.clearSelection();
-        
+
     }
-    
-    private void vista(Boolean bool){
+
+    private void vista(Boolean bool) {
         jpDatos.setVisible(bool);
         jpAction.setVisible(bool);
         jpActionSave.setVisible(bool);
     }
-    
-    private void vistaGuardar(Boolean bool){
+
+    private void vistaGuardar(Boolean bool) {
         jpDatos.setVisible(bool);
         jpAction.setVisible(!bool);
         jpActionSave.setVisible(bool);
+        cEditable(true);
     }
-    
-    private void vistaEditDel(Boolean bool){
+
+    private void vistaEditDel(Boolean bool) {
         jpDatos.setVisible(bool);
         jpAction.setVisible(bool);
         jpActionSave.setVisible(!bool);
+        cEditable(false);
     }
-    
-    private void cargaDTO(){
+
+    private void cargaDTO() {
         txtNombre.setText(categoriaDTO.getNombre());
     }
     
-    public void regresar(){
+    private void cEditable(Boolean value){
+        txtNombre.setEditable(value);
+    }
+    
+    public void regresar() {
         this.dispose();
         new MainView().setVisible(true);
     }

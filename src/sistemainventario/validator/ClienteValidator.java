@@ -16,8 +16,5 @@ public class ClienteValidator {
         
         if (cliente.getCelular().isEmpty())
             throw new IllegalArgumentException("El celular es Obligatorio");
-        
-        if (cliente.getDireccion().isEmpty())
-            throw new IllegalArgumentException("La direccion es Obligatorio");
     }
 }

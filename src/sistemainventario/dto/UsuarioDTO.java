@@ -84,7 +84,4 @@ public class UsuarioDTO {
         return "UsuarioDTO{" + "username=" + username + ", nombres=" + nombres + ", apellidos=" + apellidos + ", cargo=" + cargo + ", rol=" + rol.getNombre() + '}';
     }
     
-    
-    
-    
 }

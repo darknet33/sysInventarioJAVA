@@ -16,7 +16,7 @@ public class CategoriaDAO implements IDAO<Categoria,Integer>{
     @Override
     public Categoria mapResultSetToEntity(ResultSet rs) throws SQLException {
         Categoria entity = new Categoria();
-        entity.setId(rs.getInt("id_usuario"));
+        entity.setId(rs.getInt("id_categoria"));
         entity.setNombre(rs.getString("nombre_categoria"));
 
         return entity;

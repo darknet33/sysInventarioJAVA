@@ -2,16 +2,19 @@ package sistemainventario.services;
 
 import java.util.List;
 import sistemainventario.dao.CategoriaDAO;
+import sistemainventario.dao.ProductoDAO;
 import sistemainventario.dto.CategoriaDTO;
 import sistemainventario.mappers.CategoriaMapper;
 import sistemainventario.validator.CategoriaValidator;
 
 public class CategoriaService implements IService<CategoriaDTO, Integer>{
     private final CategoriaDAO categoriaDAO;
+    private final ProductoDAO productoDAO;
     private final CategoriaMapper categoriaMapper;
     
     public CategoriaService() {
         this.categoriaDAO = new CategoriaDAO();
+        this.productoDAO= new ProductoDAO();
         this.categoriaMapper =new CategoriaMapper();
     }
     
@@ -42,7 +45,12 @@ public class CategoriaService implements IService<CategoriaDTO, Integer>{
 
     @Override
     public void eliminar(Integer id) {
-        categoriaDAO.delete(id); 
+        int cantidadProductos = productoDAO.contarPorCategoria(id);
+        if (cantidadProductos > 0) {
+            throw new IllegalArgumentException("No se puede eliminar la categoría porque tiene productos asociados.");
+        }else{
+            categoriaDAO.delete(id); 
+        }
     }
 
     

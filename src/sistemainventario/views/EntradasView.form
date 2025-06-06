@@ -48,8 +48,11 @@
                   <Component id="jpMenu" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="jpHeader" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <Component id="jpContainer" max="32767" attributes="0"/>
-                      <Component id="jpHeader" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -78,13 +81,16 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="btnInicio" max="32767" attributes="0"/>
-                          <Component id="btnRegresar" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnCompras" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnEntradas" alignment="0" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="btnCompras" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="btnRegresar" min="-2" pref="200" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="btnProveedor" alignment="0" pref="227" max="32767" attributes="0"/>
+                          <Component id="btnInicio1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnEntradas" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -96,7 +102,9 @@
                       <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
                       <Component id="btnCompras" min="-2" pref="40" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnInicio" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="btnProveedor" min="-2" pref="40" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btnInicio1" min="-2" pref="40" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="btnRegresar" min="-2" pref="40" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
@@ -114,9 +122,9 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/sistemainventario/resources/images/productos.png"/>
+                  <Image iconType="3" name="/sistemainventario/resources/images/entradas.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Productos"/>
+                <Property name="text" type="java.lang.String" value="Entradas"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                   <Color id="Hand Cursor"/>
                 </Property>
@@ -125,14 +133,17 @@
             </Component>
             <Component class="javax.swing.JLabel" name="btnCompras">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="cc" green="66" red="0" type="rgb"/>
+                </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI Black" size="24" style="1"/>
+                  <Font name="Segoe UI Black" size="20" style="1"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/sistemainventario/resources/images/Categorias.png"/>
+                  <Image iconType="3" name="/sistemainventario/resources/images/Compras.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Compras"/>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
@@ -140,6 +151,7 @@
                   <Color id="Hand Cursor"/>
                 </Property>
                 <Property name="iconTextGap" type="int" value="50"/>
+                <Property name="opaque" type="boolean" value="true"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="btnRegresar">
@@ -163,13 +175,37 @@
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnRegresarMouseClicked"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="btnInicio">
+            <Component class="javax.swing.JLabel" name="btnProveedor">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="86" green="34" red="0" type="rgb"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI Black" size="24" style="1"/>
+                  <Font name="Segoe UI Black" size="20" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/sistemainventario/resources/images/proveedores.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Proveedores"/>
+                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                  <Color id="Hand Cursor"/>
+                </Property>
+                <Property name="iconTextGap" type="int" value="50"/>
+              </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnProveedorMouseClicked"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="btnInicio1">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="86" green="34" red="0" type="rgb"/>
+                </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI Black" size="20" style="1"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -177,7 +213,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/sistemainventario/resources/images/Items.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Items"/>
+                <Property name="text" type="java.lang.String" value="Pagos"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                   <Color id="Hand Cursor"/>
                 </Property>
@@ -202,7 +238,7 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Component id="lblTitulo" min="-2" pref="344" max="-2" attributes="0"/>
-                      <EmptySpace pref="109" max="32767" attributes="0"/>
+                      <EmptySpace pref="114" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lblNombreCompleto" alignment="1" min="-2" pref="214" max="-2" attributes="0"/>
                           <Component id="lblRol" alignment="1" min="-2" pref="217" max="-2" attributes="0"/>

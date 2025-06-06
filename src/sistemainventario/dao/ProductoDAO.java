@@ -135,4 +135,19 @@ public class ProductoDAO implements IDAO<Producto, Integer>{
         }
     }
     
+    public int contarPorCategoria(Integer categoriaId) {
+        String sql = "SELECT COUNT(*) FROM productos WHERE categoria_id = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, categoriaId);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            Mensajes.error(sql, e);
+        }
+        return 0;
+    }
+
+    
 }

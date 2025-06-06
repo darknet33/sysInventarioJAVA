@@ -33,7 +33,8 @@ public final class EntradasView extends javax.swing.JFrame {
         btnEntradas = new javax.swing.JLabel();
         btnCompras = new javax.swing.JLabel();
         btnRegresar = new javax.swing.JLabel();
-        btnInicio = new javax.swing.JLabel();
+        btnProveedor = new javax.swing.JLabel();
+        btnInicio1 = new javax.swing.JLabel();
         jpHeader = new javax.swing.JPanel();
         lblUserImg = new javax.swing.JLabel();
         lblNombreCompleto = new javax.swing.JLabel();
@@ -50,18 +51,20 @@ public final class EntradasView extends javax.swing.JFrame {
 
         btnEntradas.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
         btnEntradas.setForeground(new java.awt.Color(255, 255, 255));
-        btnEntradas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sistemainventario/resources/images/productos.png"))); // NOI18N
-        btnEntradas.setText("Productos");
+        btnEntradas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sistemainventario/resources/images/entradas.png"))); // NOI18N
+        btnEntradas.setText("Entradas");
         btnEntradas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEntradas.setIconTextGap(50);
 
-        btnCompras.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
+        btnCompras.setBackground(new java.awt.Color(0, 102, 204));
+        btnCompras.setFont(new java.awt.Font("Segoe UI Black", 1, 20)); // NOI18N
         btnCompras.setForeground(new java.awt.Color(255, 255, 255));
-        btnCompras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sistemainventario/resources/images/Categorias.png"))); // NOI18N
+        btnCompras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sistemainventario/resources/images/Compras.png"))); // NOI18N
         btnCompras.setText("Compras");
         btnCompras.setToolTipText("");
         btnCompras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCompras.setIconTextGap(50);
+        btnCompras.setOpaque(true);
 
         btnRegresar.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         btnRegresar.setForeground(new java.awt.Color(255, 255, 255));
@@ -75,13 +78,26 @@ public final class EntradasView extends javax.swing.JFrame {
             }
         });
 
-        btnInicio.setBackground(new java.awt.Color(0, 52, 134));
-        btnInicio.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
-        btnInicio.setForeground(new java.awt.Color(255, 255, 255));
-        btnInicio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sistemainventario/resources/images/Items.png"))); // NOI18N
-        btnInicio.setText("Items");
-        btnInicio.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnInicio.setIconTextGap(50);
+        btnProveedor.setBackground(new java.awt.Color(0, 52, 134));
+        btnProveedor.setFont(new java.awt.Font("Segoe UI Black", 1, 20)); // NOI18N
+        btnProveedor.setForeground(new java.awt.Color(255, 255, 255));
+        btnProveedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sistemainventario/resources/images/proveedores.png"))); // NOI18N
+        btnProveedor.setText("Proveedores");
+        btnProveedor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnProveedor.setIconTextGap(50);
+        btnProveedor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnProveedorMouseClicked(evt);
+            }
+        });
+
+        btnInicio1.setBackground(new java.awt.Color(0, 52, 134));
+        btnInicio1.setFont(new java.awt.Font("Segoe UI Black", 1, 20)); // NOI18N
+        btnInicio1.setForeground(new java.awt.Color(255, 255, 255));
+        btnInicio1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sistemainventario/resources/images/Items.png"))); // NOI18N
+        btnInicio1.setText("Pagos");
+        btnInicio1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnInicio1.setIconTextGap(50);
 
         javax.swing.GroupLayout jpMenuLayout = new javax.swing.GroupLayout(jpMenu);
         jpMenu.setLayout(jpMenuLayout);
@@ -89,12 +105,14 @@ public final class EntradasView extends javax.swing.JFrame {
             jpMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpMenuLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jpMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnRegresar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jpMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnCompras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnEntradas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jpMenuLayout.createSequentialGroup()
+                        .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnProveedor, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
+                    .addComponent(btnInicio1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnEntradas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jpMenuLayout.setVerticalGroup(
             jpMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -104,7 +122,9 @@ public final class EntradasView extends javax.swing.JFrame {
                 .addGap(54, 54, 54)
                 .addComponent(btnCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnInicio1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44))
@@ -135,7 +155,7 @@ public final class EntradasView extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpHeaderLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE)
                 .addGroup(jpHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblNombreCompleto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblRol, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -181,8 +201,10 @@ public final class EntradasView extends javax.swing.JFrame {
                 .addComponent(jpMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jpContainer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jpHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jpBGLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jpHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jpContainer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jpBGLayout.setVerticalGroup(
             jpBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -213,12 +235,17 @@ public final class EntradasView extends javax.swing.JFrame {
         new MainView().setVisible(true);
     }//GEN-LAST:event_btnRegresarMouseClicked
 
+    private void btnProveedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProveedorMouseClicked
+        this.dispose();
+        new ProveedoresView().setVisible(true);
+    }//GEN-LAST:event_btnProveedorMouseClicked
+
     public void cargaDatos(){
         UsuarioDTO u=Sesion.getUsuario();
         
         lblNombreCompleto.setText(u.getNombres()+ " " +u.getApellidos());
         lblRol.setText(u.getRol().getNombre());
-        lblTitulo.setText("Entradas");
+        lblTitulo.setText("Compras");
         
     }
     
@@ -230,7 +257,8 @@ public final class EntradasView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnCompras;
     private javax.swing.JLabel btnEntradas;
-    private javax.swing.JLabel btnInicio;
+    private javax.swing.JLabel btnInicio1;
+    private javax.swing.JLabel btnProveedor;
     private javax.swing.JLabel btnRegresar;
     private javax.swing.JPanel jpBG;
     private javax.swing.JPanel jpContainer;
