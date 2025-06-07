@@ -8,35 +8,41 @@ public class UsuarioMapper implements IMapper<Usuario, UsuarioDTO> {
     private final RolMapper rolMapper = new RolMapper();
     
     @Override
-    public UsuarioDTO toDTO(Usuario model) {
+    public UsuarioDTO toDTO(Usuario entity) {
         UsuarioDTO dto = new UsuarioDTO();
-
-        dto.setId(model.getId());
-        dto.setUsername(model.getUsername());
-        dto.setPassword(model.getPassword());
-        dto.setNombres(model.getNombres());
-        dto.setApellidos(model.getApellidos());
-        dto.setCargo(model.getCargo());
-        dto.setRol(rolMapper.toDTO(model.getRol()));
-        dto.setEstado(model.getEstado());
+        if (entity==null){
+            return null;
+        }
+        dto.setId(entity.getId());
+        dto.setUsername(entity.getUsername());
+        dto.setPassword(entity.getPassword());
+        dto.setNombres(entity.getNombres());
+        dto.setApellidos(entity.getApellidos());
+        dto.setCargo(entity.getCargo());
+        dto.setRol(rolMapper.toDTO(entity.getRol()));
+        dto.setEstado(entity.getEstado());
+        dto.setFechaRegistro(entity.getFechaRegistro());
+        dto.setFechaActualizado(entity.getFechaActualizado());
 
         return dto;
     }
 
     @Override
     public Usuario toEntity(UsuarioDTO dto) {
-        Usuario model = new Usuario();
+        Usuario entity = new Usuario();
 
-        model.setId(dto.getId());
-        model.setUsername(dto.getUsername());
-        model.setPassword(dto.getPassword());
-        model.setNombres(dto.getNombres());
-        model.setApellidos(dto.getApellidos());
-        model.setCargo(dto.getCargo());
-        model.setRol(rolMapper.toEntity(dto.getRol()));
-        model.setEstado(dto.getEstado());
+        entity.setId(dto.getId());
+        entity.setUsername(dto.getUsername());
+        entity.setPassword(dto.getPassword());
+        entity.setNombres(dto.getNombres());
+        entity.setApellidos(dto.getApellidos());
+        entity.setCargo(dto.getCargo());
+        entity.setRol(rolMapper.toEntity(dto.getRol()));
+        entity.setEstado(dto.getEstado());
+        entity.setFechaRegistro(dto.getFechaRegistro());
+        entity.setFechaActualizado(dto.getFechaActualizado());
 
-        return model;
+        return entity;
     }
 
     @Override

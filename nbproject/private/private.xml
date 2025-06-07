@@ -5,12 +5,15 @@
             <url>src/sistemainventario/dao/ProductoDAO.java</url>
             <bookmark id="1">
                 <name/>
-                <line>105</line>
+                <line>106</line>
                 <key/>
             </bookmark>
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/royto/OneDrive/Documentos/Proyecto%20General/JAVA%20SIstema%20Inventario/SistemaInventario/src/sistemainventario/views/EntradasView.java</file>
+            <file>file:/C:/Users/royto/OneDrive/Documentos/Proyecto%20General/JAVA%20SIstema%20Inventario/SistemaInventario/src/sistemainventario/views/ProveedoresView.java</file>
+        </group>
     </open-files>
 </project-private>

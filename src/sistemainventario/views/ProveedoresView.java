@@ -48,12 +48,14 @@ public final class ProveedoresView extends javax.swing.JFrame {
         btnEntradas = new javax.swing.JLabel();
         btnCompras = new javax.swing.JLabel();
         btnProveedor = new javax.swing.JLabel();
-        btnInicio1 = new javax.swing.JLabel();
-        jpHeader = new javax.swing.JPanel();
+        btnPagos = new javax.swing.JLabel();
+        jpHeader3 = new javax.swing.JPanel();
         lblUserImg = new javax.swing.JLabel();
         lblNombreCompleto = new javax.swing.JLabel();
         lblRol = new javax.swing.JLabel();
         lblTitulo = new javax.swing.JLabel();
+        btnCerrar = new javax.swing.JLabel();
+        btnMinimizar = new javax.swing.JLabel();
         jpContainer = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProveedor = new javax.swing.JTable();
@@ -67,16 +69,16 @@ public final class ProveedoresView extends javax.swing.JFrame {
         jpAction = new javax.swing.JPanel();
         btnEditar = new javax.swing.JLabel();
         btnEliminar = new javax.swing.JLabel();
-        lblNombre1 = new javax.swing.JLabel();
+        lblNit = new javax.swing.JLabel();
         txtMateriales = new javax.swing.JTextField();
         txtEmail = new javax.swing.JTextField();
-        lblNombre2 = new javax.swing.JLabel();
-        lblNombre3 = new javax.swing.JLabel();
+        lblEmail = new javax.swing.JLabel();
+        lblCelular = new javax.swing.JLabel();
         txtCelular = new javax.swing.JTextField();
         chkEstado = new javax.swing.JCheckBox();
         txtContacto = new javax.swing.JTextField();
-        lblNombre4 = new javax.swing.JLabel();
-        lblNombre5 = new javax.swing.JLabel();
+        lblContacto = new javax.swing.JLabel();
+        lblMateriales = new javax.swing.JLabel();
         txtNit = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
         txtBuscar = new javax.swing.JTextField();
@@ -131,13 +133,13 @@ public final class ProveedoresView extends javax.swing.JFrame {
         btnProveedor.setIconTextGap(50);
         btnProveedor.setOpaque(true);
 
-        btnInicio1.setBackground(new java.awt.Color(0, 102, 204));
-        btnInicio1.setFont(new java.awt.Font("Segoe UI Black", 1, 20)); // NOI18N
-        btnInicio1.setForeground(new java.awt.Color(255, 255, 255));
-        btnInicio1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sistemainventario/resources/images/Pagos.png"))); // NOI18N
-        btnInicio1.setText("Pagos");
-        btnInicio1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnInicio1.setIconTextGap(50);
+        btnPagos.setBackground(new java.awt.Color(0, 102, 204));
+        btnPagos.setFont(new java.awt.Font("Segoe UI Black", 1, 20)); // NOI18N
+        btnPagos.setForeground(new java.awt.Color(255, 255, 255));
+        btnPagos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sistemainventario/resources/images/Pagos.png"))); // NOI18N
+        btnPagos.setText("Pagos");
+        btnPagos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPagos.setIconTextGap(50);
 
         javax.swing.GroupLayout jpMenuLayout = new javax.swing.GroupLayout(jpMenu);
         jpMenu.setLayout(jpMenuLayout);
@@ -152,7 +154,7 @@ public final class ProveedoresView extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(btnCompras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnProveedor, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
-                    .addComponent(btnInicio1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(btnPagos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jpMenuLayout.setVerticalGroup(
             jpMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,14 +166,14 @@ public final class ProveedoresView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnInicio1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnPagos, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44))
         );
 
-        jpHeader.setBackground(new java.awt.Color(255, 255, 255));
-        jpHeader.setForeground(new java.awt.Color(255, 255, 255));
+        jpHeader3.setBackground(new java.awt.Color(255, 255, 255));
+        jpHeader3.setForeground(new java.awt.Color(255, 255, 255));
 
         lblUserImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sistemainventario/resources/images/user.png"))); // NOI18N
 
@@ -188,36 +190,60 @@ public final class ProveedoresView extends javax.swing.JFrame {
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblTitulo.setText("Titulo");
 
-        javax.swing.GroupLayout jpHeaderLayout = new javax.swing.GroupLayout(jpHeader);
-        jpHeader.setLayout(jpHeaderLayout);
-        jpHeaderLayout.setHorizontalGroup(
-            jpHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpHeaderLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
-                .addGroup(jpHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblNombreCompleto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblRol, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblUserImg, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28))
+        btnCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sistemainventario/resources/images/btnCerrar24.png"))); // NOI18N
+        btnCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCerrarMouseClicked(evt);
+            }
+        });
+
+        btnMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sistemainventario/resources/images/btnMinimizar24.png"))); // NOI18N
+        btnMinimizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMinimizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnMinimizarMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jpHeader3Layout = new javax.swing.GroupLayout(jpHeader3);
+        jpHeader3.setLayout(jpHeader3Layout);
+        jpHeader3Layout.setHorizontalGroup(
+            jpHeader3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpHeader3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpHeader3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpHeader3Layout.createSequentialGroup()
+                        .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
+                        .addGroup(jpHeader3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblNombreCompleto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblRol, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblUserImg, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpHeader3Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnMinimizar, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
-        jpHeaderLayout.setVerticalGroup(
-            jpHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpHeaderLayout.createSequentialGroup()
-                .addGroup(jpHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpHeaderLayout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addGroup(jpHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblUserImg, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblRol, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jpHeaderLayout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addGroup(jpHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblNombreCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(21, Short.MAX_VALUE))
+        jpHeader3Layout.setVerticalGroup(
+            jpHeader3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpHeader3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpHeader3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnMinimizar, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jpHeader3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblUserImg, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jpHeader3Layout.createSequentialGroup()
+                        .addComponent(lblRol, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblNombreCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jpContainer.setBackground(new java.awt.Color(255, 255, 255));
@@ -363,21 +389,21 @@ public final class ProveedoresView extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        lblNombre1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblNombre1.setForeground(new java.awt.Color(0, 153, 255));
-        lblNombre1.setText("NIT:");
+        lblNit.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblNit.setForeground(new java.awt.Color(0, 153, 255));
+        lblNit.setText("NIT:");
 
         txtMateriales.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         txtEmail.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        lblNombre2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblNombre2.setForeground(new java.awt.Color(0, 153, 255));
-        lblNombre2.setText("Email");
+        lblEmail.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblEmail.setForeground(new java.awt.Color(0, 153, 255));
+        lblEmail.setText("Email");
 
-        lblNombre3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblNombre3.setForeground(new java.awt.Color(0, 153, 255));
-        lblNombre3.setText("Celular");
+        lblCelular.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblCelular.setForeground(new java.awt.Color(0, 153, 255));
+        lblCelular.setText("Celular");
 
         txtCelular.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
@@ -387,13 +413,13 @@ public final class ProveedoresView extends javax.swing.JFrame {
 
         txtContacto.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        lblNombre4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblNombre4.setForeground(new java.awt.Color(0, 153, 255));
-        lblNombre4.setText("Contacto:");
+        lblContacto.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblContacto.setForeground(new java.awt.Color(0, 153, 255));
+        lblContacto.setText("Contacto:");
 
-        lblNombre5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblNombre5.setForeground(new java.awt.Color(0, 153, 255));
-        lblNombre5.setText("Materiales:");
+        lblMateriales.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblMateriales.setForeground(new java.awt.Color(0, 153, 255));
+        lblMateriales.setText("Materiales:");
 
         txtNit.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
@@ -411,16 +437,16 @@ public final class ProveedoresView extends javax.swing.JFrame {
                 .addGroup(jpDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtMateriales, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtContacto, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNombre4)
+                    .addComponent(lblContacto)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNombre2)
-                    .addComponent(lblNombre3)
+                    .addComponent(lblEmail)
+                    .addComponent(lblCelular)
                     .addGroup(jpDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(jpDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblNombre1)
+                            .addComponent(lblNit)
                             .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblNombre)
-                            .addComponent(lblNombre5)
+                            .addComponent(lblMateriales)
                             .addComponent(txtNit, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jpDatosLayout.createSequentialGroup()
                             .addComponent(txtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -437,23 +463,23 @@ public final class ProveedoresView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblNombre1)
+                .addComponent(lblNit)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNit, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblNombre5)
+                .addComponent(lblMateriales)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtMateriales, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblNombre4)
+                .addComponent(lblContacto)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtContacto, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblNombre2)
+                .addComponent(lblEmail)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblNombre3)
+                .addComponent(lblCelular)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -490,15 +516,16 @@ public final class ProveedoresView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jpContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jpHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jpHeader3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jpBGLayout.setVerticalGroup(
             jpBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jpMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jpBGLayout.createSequentialGroup()
-                .addComponent(jpHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jpHeader3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jpContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jpContainer, javax.swing.GroupLayout.PREFERRED_SIZE, 645, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -593,6 +620,14 @@ public final class ProveedoresView extends javax.swing.JFrame {
         new EntradasView().setVisible(true);
     }//GEN-LAST:event_btnComprasMouseClicked
 
+    private void btnMinimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizarMouseClicked
+        minimizar();
+    }//GEN-LAST:event_btnMinimizarMouseClicked
+
+    private void btnCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarMouseClicked
+        regresar();
+    }//GEN-LAST:event_btnCerrarMouseClicked
+
     private void cargaDatos(){
         UsuarioDTO u=Sesion.getUsuario();
         
@@ -679,6 +714,10 @@ public final class ProveedoresView extends javax.swing.JFrame {
         new MainView().setVisible(true);
     }
     
+    public void minimizar(){
+        this.setState(sistemainventario.views.ProveedoresView.ICONIFIED);
+    }
+    
     private List<ProveedorDTO> buscarClientes(String valorBuscado){
         if (valorBuscado == null || valorBuscado.isEmpty()) {
             return proveedores;
@@ -692,13 +731,15 @@ public final class ProveedoresView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JLabel btnCancelar;
+    private javax.swing.JLabel btnCerrar;
     private javax.swing.JLabel btnCompras;
     private javax.swing.JLabel btnEditar;
     private javax.swing.JLabel btnEliminar;
     private javax.swing.JLabel btnEntradas;
     private javax.swing.JLabel btnGuardar;
-    private javax.swing.JLabel btnInicio1;
+    private javax.swing.JLabel btnMinimizar;
     private javax.swing.JLabel btnNuevo;
+    private javax.swing.JLabel btnPagos;
     private javax.swing.JLabel btnProveedor;
     private javax.swing.JLabel btnRegresar;
     private javax.swing.JCheckBox chkEstado;
@@ -708,14 +749,14 @@ public final class ProveedoresView extends javax.swing.JFrame {
     private javax.swing.JPanel jpBG;
     private javax.swing.JPanel jpContainer;
     private javax.swing.JPanel jpDatos;
-    private javax.swing.JPanel jpHeader;
+    private javax.swing.JPanel jpHeader3;
     private javax.swing.JPanel jpMenu;
+    private javax.swing.JLabel lblCelular;
+    private javax.swing.JLabel lblContacto;
+    private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblMateriales;
+    private javax.swing.JLabel lblNit;
     private javax.swing.JLabel lblNombre;
-    private javax.swing.JLabel lblNombre1;
-    private javax.swing.JLabel lblNombre2;
-    private javax.swing.JLabel lblNombre3;
-    private javax.swing.JLabel lblNombre4;
-    private javax.swing.JLabel lblNombre5;
     private javax.swing.JLabel lblNombreCompleto;
     private javax.swing.JLabel lblRol;
     private javax.swing.JLabel lblTitulo;

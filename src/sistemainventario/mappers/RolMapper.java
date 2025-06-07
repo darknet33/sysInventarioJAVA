@@ -9,22 +9,24 @@ public class RolMapper implements IMapper<Rol, RolDTO>{
     private final PermisoMapper permisoMapper=new PermisoMapper();
     
     @Override
-    public RolDTO toDTO(Rol model) {
+    public RolDTO toDTO(Rol entity) {
         RolDTO dto = new RolDTO();
-        dto.setNombre(model.getNombre());
+        dto.setId(entity.getId());
+        dto.setNombre(entity.getNombre());
         
-        dto.setPermisos(permisoMapper.toDTOList(model.getPermisos()));
+        dto.setPermisos(permisoMapper.toDTOList(entity.getPermisos()));
                
         return dto;
     }
     
     @Override
     public Rol toEntity(RolDTO dto){
-        Rol model=new Rol();
-        model.setNombre(dto.getNombre());
+        Rol entity=new Rol();
+        entity.setId(dto.getId());
+        entity.setNombre(dto.getNombre());
         
-        model.setPermisos(permisoMapper.toEntityList(dto.getPermisos()));
-        return model;
+        entity.setPermisos(permisoMapper.toEntityList(dto.getPermisos()));
+        return entity;
     }
 
     @Override

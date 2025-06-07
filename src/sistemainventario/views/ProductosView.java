@@ -27,7 +27,7 @@ public final class ProductosView extends javax.swing.JFrame {
     public ProductosView() {
         this.categoriaController=new CategoriaController();
         this.productoController=new ProductoController();
-        this.productos=productoController.listarProductos();
+        this.productos= productoController.listarProductos();
         this.categorias = categoriaController.listarCategoria();
         
         initComponents();        
@@ -64,6 +64,8 @@ public final class ProductosView extends javax.swing.JFrame {
         lblNombreCompleto = new javax.swing.JLabel();
         lblRol = new javax.swing.JLabel();
         lblTitulo = new javax.swing.JLabel();
+        btnMinimizar = new javax.swing.JLabel();
+        btnCerrar = new javax.swing.JLabel();
         jpContainer = new javax.swing.JPanel();
         btnNuevo = new javax.swing.JLabel();
         jScrollPane = new javax.swing.JScrollPane();
@@ -77,7 +79,7 @@ public final class ProductosView extends javax.swing.JFrame {
         btnEliminar = new javax.swing.JLabel();
         btnRefreshCategoria = new javax.swing.JLabel();
         lblMarca = new javax.swing.JLabel();
-        lblStockInicial1 = new javax.swing.JLabel();
+        lblStockInicial = new javax.swing.JLabel();
         lblDescripcion = new javax.swing.JLabel();
         lblProcedencia = new javax.swing.JLabel();
         txtMarca = new javax.swing.JTextField();
@@ -94,7 +96,7 @@ public final class ProductosView extends javax.swing.JFrame {
         chkEstado = new javax.swing.JCheckBox();
         cboCategoria = new javax.swing.JComboBox<>();
         txtBuscar = new javax.swing.JTextField();
-        lblCodigo1 = new javax.swing.JLabel();
+        lblBuscar = new javax.swing.JLabel();
         cboCriterio = new javax.swing.JComboBox<>();
         btnBuscar = new javax.swing.JButton();
 
@@ -198,36 +200,60 @@ public final class ProductosView extends javax.swing.JFrame {
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblTitulo.setText("Titulo");
 
+        btnMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sistemainventario/resources/images/btnMinimizar24.png"))); // NOI18N
+        btnMinimizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMinimizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnMinimizarMouseClicked(evt);
+            }
+        });
+
+        btnCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sistemainventario/resources/images/btnCerrar24.png"))); // NOI18N
+        btnCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCerrarMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jpHeaderLayout = new javax.swing.GroupLayout(jpHeader);
         jpHeader.setLayout(jpHeaderLayout);
         jpHeaderLayout.setHorizontalGroup(
             jpHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpHeaderLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jpHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblNombreCompleto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblRol, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblUserImg, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28))
+                .addGroup(jpHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jpHeaderLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnMinimizar, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpHeaderLayout.createSequentialGroup()
+                        .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jpHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblNombreCompleto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblRol, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblUserImg, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(16, 16, 16))
         );
         jpHeaderLayout.setVerticalGroup(
             jpHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpHeaderLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpHeaderLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnMinimizar, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addGroup(jpHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpHeaderLayout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addGroup(jpHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblUserImg, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblRol, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblUserImg, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jpHeaderLayout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addGroup(jpHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblNombreCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(21, Short.MAX_VALUE))
+                        .addComponent(lblRol, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblNombreCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         jpContainer.setBackground(new java.awt.Color(255, 255, 255));
@@ -387,10 +413,10 @@ public final class ProductosView extends javax.swing.JFrame {
         lblMarca.setText("Marca");
         jpDatos.add(lblMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 170, -1, -1));
 
-        lblStockInicial1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblStockInicial1.setForeground(new java.awt.Color(0, 153, 255));
-        lblStockInicial1.setText("Stock Inicial (Unid.)");
-        jpDatos.add(lblStockInicial1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, -1, -1));
+        lblStockInicial.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblStockInicial.setForeground(new java.awt.Color(0, 153, 255));
+        lblStockInicial.setText("Stock Inicial (Unid.)");
+        jpDatos.add(lblStockInicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, -1, -1));
 
         lblDescripcion.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblDescripcion.setForeground(new java.awt.Color(0, 153, 255));
@@ -455,9 +481,9 @@ public final class ProductosView extends javax.swing.JFrame {
 
         txtBuscar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        lblCodigo1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblCodigo1.setForeground(new java.awt.Color(0, 153, 255));
-        lblCodigo1.setText("Buscar");
+        lblBuscar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblBuscar.setForeground(new java.awt.Color(0, 153, 255));
+        lblBuscar.setText("Buscar");
 
         cboCriterio.setBackground(new java.awt.Color(255, 255, 255));
         cboCriterio.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -484,7 +510,7 @@ public final class ProductosView extends javax.swing.JFrame {
                     .addGroup(jpContainerLayout.createSequentialGroup()
                         .addComponent(btnNuevo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblCodigo1)
+                        .addComponent(lblBuscar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(cboCriterio, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
@@ -507,7 +533,7 @@ public final class ProductosView extends javax.swing.JFrame {
                     .addComponent(btnNuevo)
                     .addGroup(jpContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblCodigo1)
+                        .addComponent(lblBuscar)
                         .addComponent(cboCriterio, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(240, 240, 240)
@@ -681,6 +707,14 @@ public final class ProductosView extends javax.swing.JFrame {
         cargarProductos(buscarProducto(valorBuscado, criterioBusqueda));
     }//GEN-LAST:event_btnBuscarActionPerformed
 
+    private void btnMinimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizarMouseClicked
+        minimizar();
+    }//GEN-LAST:event_btnMinimizarMouseClicked
+
+    private void btnCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarMouseClicked
+        regresar();
+    }//GEN-LAST:event_btnCerrarMouseClicked
+
     public void cargaDatos() {
         UsuarioDTO u = Sesion.getUsuario();
 
@@ -778,6 +812,10 @@ public final class ProductosView extends javax.swing.JFrame {
         new MainView().setVisible(true);
     }
     
+    public void minimizar(){
+        this.setState(sistemainventario.views.ProductosView.ICONIFIED);
+    }
+    
     public CategoriaDTO buscarCategoria(String Nombre){
         return categorias.stream()
         .filter(c -> c.getNombre().equalsIgnoreCase(Nombre))
@@ -826,10 +864,12 @@ public final class ProductosView extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscar;
     private javax.swing.JLabel btnCancelar;
     private javax.swing.JLabel btnCategoria;
+    private javax.swing.JLabel btnCerrar;
     private javax.swing.JLabel btnEditar;
     private javax.swing.JLabel btnEliminar;
     private javax.swing.JLabel btnGuardar;
     private javax.swing.JLabel btnItem;
+    private javax.swing.JLabel btnMinimizar;
     private javax.swing.JLabel btnNuevo;
     private javax.swing.JLabel btnProductos;
     private javax.swing.JLabel btnRefreshCategoria;
@@ -845,16 +885,16 @@ public final class ProductosView extends javax.swing.JFrame {
     private javax.swing.JPanel jpDatos;
     private javax.swing.JPanel jpHeader;
     private javax.swing.JPanel jpMenu;
+    private javax.swing.JLabel lblBuscar;
     private javax.swing.JLabel lblCategoria;
     private javax.swing.JLabel lblCodigo;
-    private javax.swing.JLabel lblCodigo1;
     private javax.swing.JLabel lblDescripcion;
     private javax.swing.JLabel lblMarca;
     private javax.swing.JLabel lblNombreCompleto;
     private javax.swing.JLabel lblPeso;
     private javax.swing.JLabel lblProcedencia;
     private javax.swing.JLabel lblRol;
-    private javax.swing.JLabel lblStockInicial1;
+    private javax.swing.JLabel lblStockInicial;
     private javax.swing.JLabel lblStockMinimo;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblUserImg;

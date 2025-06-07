@@ -1,8 +1,10 @@
 package sistemainventario.controller;
 
+import sistemainventario.dao.ConexionDAO;
 import sistemainventario.dto.UsuarioDTO;
 import sistemainventario.services.UsuarioService;
 import sistemainventario.util.Mensajes;
+import sistemainventario.util.Sesion;
 
 public class LoginController {
 
@@ -12,13 +14,27 @@ public class LoginController {
         this.usuarioService = new UsuarioService();
     }
 
-    public UsuarioDTO realizarIngreso(String username, String password) {
+    public boolean Ingresar(String username, String password) {
         try {
-            UsuarioDTO dto = usuarioService.login(username, password);
-            return dto;
+            Sesion.setUsuario(usuarioService.login(username, password));
+            return true;
         } catch (IllegalArgumentException e) {
             Mensajes.errorValidaciones(e);
-            return null;
+            return false;
         }
+    }
+    
+    public void cerrarSesion (){
+        try {
+            usuarioService.actualizar(Sesion.getUsuario());
+        } catch (Exception e) {
+            Mensajes.errorValidaciones(e);
+        }finally{
+            Sesion.cerrarSesion();
+        }
+    }
+    
+    public void cerrarConexion(){
+        ConexionDAO.closeConexion();
     }
 }

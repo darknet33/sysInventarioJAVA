@@ -1,5 +1,7 @@
 package sistemainventario.dto;
 
+import java.util.Date;
+
 public class UsuarioDTO {
     private int id;
     private String username;
@@ -9,6 +11,8 @@ public class UsuarioDTO {
     private String cargo;
     private RolDTO rol;
     private boolean estado;
+    private Date fechaRegistro;
+    private Date fechaActualizado;
 
     public UsuarioDTO() {
     }
@@ -77,6 +81,24 @@ public class UsuarioDTO {
     public void setEstado(boolean estado) {
         this.estado = estado;
     }
+
+    public Date getFechaRegistro() {
+        return fechaRegistro;
+    }
+
+    public void setFechaRegistro(Date fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
+    }
+
+    public Date getFechaActualizado() {
+        return fechaActualizado;
+    }
+
+    public void setFechaActualizado(Date fechaActualizado) {
+        this.fechaActualizado = fechaActualizado;
+    }
+    
+    
        
     
     @Override

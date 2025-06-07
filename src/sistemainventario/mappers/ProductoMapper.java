@@ -9,48 +9,48 @@ public class ProductoMapper implements IMapper<Producto, ProductoDTO>{
     private final UsuarioMapper usuarioMapper = new UsuarioMapper();
     
     @Override    
-    public ProductoDTO toDTO(Producto model){
+    public ProductoDTO toDTO(Producto entity){
         ProductoDTO dto=new ProductoDTO();
         
-        dto.setId(model.getId());
-        dto.setCodigo(model.getCodigo());
-        dto.setCategoria(categoriaMapper.toDTO(model.getCategoria()));
-        dto.setDescripcion(model.getDescripcion());
-        dto.setMarca(model.getMarca());
-        dto.setProcedencia(model.getProcedencia().toUpperCase());
-        dto.setPeso(model.getPeso());
-        dto.setStockInicial(model.getStockInicial());
-        dto.setStockActual(model.getStockActual());
-        dto.setStockMinimo(model.getStockMinimo());
-        if (model.getEstado()){
+        dto.setId(entity.getId());
+        dto.setCodigo(entity.getCodigo());
+        dto.setCategoria(categoriaMapper.toDTO(entity.getCategoria()));
+        dto.setDescripcion(entity.getDescripcion());
+        dto.setMarca(entity.getMarca());
+        dto.setProcedencia(entity.getProcedencia().toUpperCase());
+        dto.setPeso(entity.getPeso());
+        dto.setStockInicial(entity.getStockInicial());
+        dto.setStockActual(entity.getStockActual());
+        dto.setStockMinimo(entity.getStockMinimo());
+        if (entity.getEstado()){
             dto.setEstado("Habilitado");
         }else{
             dto.setEstado("Desabilitado");
         }
         
-        dto.setUsuario(usuarioMapper.toDTO(model.getUsuario()));
+        dto.setUsuario(usuarioMapper.toDTO(entity.getUsuario()));
         
         return dto;
     }
     
     @Override
     public Producto toEntity(ProductoDTO dto){
-        Producto model=new Producto();
+        Producto entity=new Producto();
         
-        model.setId(dto.getId());
-        model.setCodigo(dto.getCodigo());
-        model.setCategoria(categoriaMapper.toEntity(dto.getCategoria()));
-        model.setDescripcion(dto.getDescripcion());
-        model.setMarca(dto.getMarca());
-        model.setProcedencia(dto.getProcedencia().toUpperCase());
-        model.setPeso(dto.getPeso());
-        model.setStockInicial(dto.getStockInicial());
-        model.setStockActual(dto.getStockActual());
-        model.setStockMinimo(dto.getStockMinimo());
-        model.setEstado(dto.getEstado().equals("Habilitado"));
-        model.setUsuario(usuarioMapper.toEntity(dto.getUsuario()));
+        entity.setId(dto.getId());
+        entity.setCodigo(dto.getCodigo());
+        entity.setCategoria(categoriaMapper.toEntity(dto.getCategoria()));
+        entity.setDescripcion(dto.getDescripcion());
+        entity.setMarca(dto.getMarca());
+        entity.setProcedencia(dto.getProcedencia().toUpperCase());
+        entity.setPeso(dto.getPeso());
+        entity.setStockInicial(dto.getStockInicial());
+        entity.setStockActual(dto.getStockActual());
+        entity.setStockMinimo(dto.getStockMinimo());
+        entity.setEstado(dto.getEstado().equals("Habilitado"));
+        entity.setUsuario(usuarioMapper.toEntity(dto.getUsuario()));
         
-        return model;
+        return entity;
     }
 
     @Override

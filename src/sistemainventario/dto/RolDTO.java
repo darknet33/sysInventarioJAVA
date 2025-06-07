@@ -3,11 +3,21 @@ package sistemainventario.dto;
 import java.util.List;
 
 public class RolDTO {
+    private int id;
     private String nombre;
     private List<PermisoDTO> permisos;
 
     public RolDTO() {
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
 
     public String getNombre() {
         return nombre;

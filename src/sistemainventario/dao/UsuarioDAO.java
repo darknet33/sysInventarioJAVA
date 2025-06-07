@@ -78,7 +78,7 @@ public class UsuarioDAO implements IDAO<Usuario,Integer>{
 
     @Override
     public void save(Usuario entity) {
-        String sql = "INSERT INTO usuarios (username_usuario, password_usuario, nombres_usuario, apellidos_usuario, cargo_usuario, rol_id, f_registro_usuario, f_actualizado_usuario, estado_usuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO usuarios (username_usuario, password_usuario, nombres_usuario, apellidos_usuario, cargo_usuario, rol_id, estado_usuario) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, entity.getUsername());
             stmt.setString(2, entity.getPassword());
@@ -86,9 +86,7 @@ public class UsuarioDAO implements IDAO<Usuario,Integer>{
             stmt.setString(4, entity.getApellidos());
             stmt.setString(5, entity.getCargo());
             stmt.setInt(6, entity.getRol().getId());
-            stmt.setTimestamp(7, new Timestamp(entity.getFechaRegistro().getTime()));
-            stmt.setTimestamp(8, new Timestamp(entity.getFechaActualizado().getTime()));
-            stmt.setBoolean(9, entity.getEstado());
+            stmt.setBoolean(7, entity.getEstado());
             stmt.executeUpdate();  
         } catch (Exception e) {
             Mensajes.error(sql, e);
@@ -97,7 +95,7 @@ public class UsuarioDAO implements IDAO<Usuario,Integer>{
 
     @Override
     public void update(Usuario entity) {
-        String sql = "UPDATE usuarios SET username_usuario = ?, password_usuario = ?, nombres_usuario = ?, apellidos_usuario = ?, cargo_usuario = ?, rol_id = ?, f_actualizado_usuario = ?, estado_usuario = ? WHERE id_usuario = ?";
+        String sql = "UPDATE usuarios SET username_usuario = ?, password_usuario = ?, nombres_usuario = ?, apellidos_usuario = ?, cargo_usuario = ?, rol_id = ?, estado_usuario = ? WHERE id_usuario = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, entity.getUsername());
             stmt.setString(2, entity.getPassword());
@@ -105,9 +103,8 @@ public class UsuarioDAO implements IDAO<Usuario,Integer>{
             stmt.setString(4, entity.getApellidos());
             stmt.setString(5, entity.getCargo());
             stmt.setInt(6, entity.getRol().getId());
-            stmt.setTimestamp(7, new Timestamp(entity.getFechaActualizado().getTime()));
-            stmt.setBoolean(8, entity.getEstado());
-            stmt.setInt(9, entity.getId());
+            stmt.setBoolean(7, entity.getEstado());
+            stmt.setInt(8, entity.getId());
             stmt.executeUpdate();
         } catch (SQLException e) {
             Mensajes.error(sql, e);

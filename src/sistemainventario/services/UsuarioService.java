@@ -48,7 +48,7 @@ public class UsuarioService implements IService<UsuarioDTO, Integer>{
         
         UsuarioDTO usuario = usuarioMapper.toDTO(usuarioDAO.getByUsername(username));
         if (usuario == null) 
-            throw new IllegalArgumentException("El usuario es Incorrecto.");
+            throw new IllegalArgumentException("El usuario es incorrecto.");
         
         if (!usuario.getPassword().equals(password))
             throw new IllegalArgumentException("Contraseña incorrecta.");
