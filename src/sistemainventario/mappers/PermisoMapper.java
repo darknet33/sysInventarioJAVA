@@ -25,10 +25,10 @@ public class PermisoMapper implements IMapper<Permiso, PermisoDTO>{
     }
     
     @Override
-    public List<PermisoDTO> toDTOList(List<Permiso> models){
+    public List<PermisoDTO> toDTOList(List<Permiso> entities){
         List<PermisoDTO> dtos=new ArrayList<>();
         
-        models.forEach(p -> {
+        entities.forEach(p -> {
             dtos.add(toDTO(p));
         });
         

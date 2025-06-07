@@ -11,6 +11,8 @@ import sistemainventario.util.Mensajes;
 
 public class ProductoDAO implements IDAO<Producto, Integer>{
     private final Connection conn;
+    private final CategoriaDAO categoriaDAO=new CategoriaDAO();
+    private final UsuarioDAO usuarioDAO=new UsuarioDAO();
     
     public ProductoDAO() {
         this.conn = ConexionDAO.getConexion();
@@ -18,37 +20,33 @@ public class ProductoDAO implements IDAO<Producto, Integer>{
     
     @Override
     public Producto mapResultSetToEntity(ResultSet rs) throws SQLException {
-        Producto producto = new Producto();
-        producto.setId(rs.getInt("id_producto"));
-        producto.setCodigo(rs.getString("codigo_producto"));
-
-        CategoriaDAO categoriaDAO=new CategoriaDAO();
-        Categoria categoria=categoriaDAO.getById(rs.getInt("categoria_id"));
+        Producto entity = new Producto();
+        entity.setId(rs.getInt("id_entity"));
+        entity.setCodigo(rs.getString("codigo_entity"));
+        entity.setDescripcion(rs.getString("descripcion_entity"));
+        entity.setMarca(rs.getString("marca_entity"));
+        entity.setProcedencia(rs.getString("procedencia_entity"));
+        entity.setPeso(rs.getString("peso_entity"));
+        entity.setStockInicial(rs.getInt("stock_inicial_entity"));
+        entity.setStockActual(rs.getInt("stock_actual_entity"));
+        entity.setStockMinimo(rs.getInt("stock_minimo_entity"));
+        entity.setFechaRegistro(rs.getTimestamp("f_registro_entity"));
+        entity.setFechaActualizado(rs.getTimestamp("f_actualizado_entity"));
+        entity.setEstado(rs.getBoolean("estado_entity"));
         
-        producto.setCategoria(categoria);
-        producto.setDescripcion(rs.getString("descripcion_producto"));
-        producto.setMarca(rs.getString("marca_producto"));
-        producto.setProcedencia(rs.getString("procedencia_producto"));
-        producto.setPeso(rs.getString("peso_producto"));
-        producto.setStockInicial(rs.getInt("stock_inicial_producto"));
-        producto.setStockActual(rs.getInt("stock_actual_producto"));
-        producto.setStockMinimo(rs.getInt("stock_minimo_producto"));
-        producto.setFechaRegistro(rs.getTimestamp("f_registro_producto"));
-        producto.setFechaActualizado(rs.getTimestamp("f_actualizado_producto"));
-        producto.setEstado(rs.getBoolean("estado_producto"));
+        Categoria categoria=categoriaDAO.getById(rs.getInt("categoria_id"));        
+        entity.setCategoria(categoria);
         
-        UsuarioDAO usuarioDAO=new UsuarioDAO();
         Usuario usuario=usuarioDAO.getById(rs.getInt("usuario_id"));
+        entity.setUsuario(usuario);
 
-        producto.setUsuario(usuario);
-
-        return producto;
+        return entity;
     } 
     
 
     @Override
     public Producto getById(Integer id) {
-        String sql= "SELECT * FROM productos WHERE id_producto = ?";
+        String sql= "SELECT * FROM entitys WHERE id_entity = ?";
         
         try (PreparedStatement stmt = conn.prepareStatement(sql)){
             stmt.setInt(1, id);
@@ -65,7 +63,7 @@ public class ProductoDAO implements IDAO<Producto, Integer>{
     @Override
     public List<Producto> getAll() {
         List<Producto> lista = new ArrayList<>();
-        String sql = "SELECT * FROM productos";
+        String sql = "SELECT * FROM entitys";
 
         try (PreparedStatement stmt = conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
@@ -83,7 +81,7 @@ public class ProductoDAO implements IDAO<Producto, Integer>{
 
     @Override
     public void save(Producto entity) {
-        String sql = "INSERT INTO productos (codigo_producto, categoria_id, descripcion_producto, marca_producto, procedencia_producto, peso_producto, stock_inicial_producto, stock_actual_producto, stock_minimo_producto,estado_producto,usuario_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)";
+        String sql = "INSERT INTO entitys (codigo_entity, categoria_id, descripcion_entity, marca_entity, procedencia_entity, peso_entity, stock_inicial_entity, stock_actual_entity, stock_minimo_entity,estado_entity,usuario_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, entity.getCodigo());
             stmt.setInt(2, entity.getCategoria().getId());
@@ -104,7 +102,7 @@ public class ProductoDAO implements IDAO<Producto, Integer>{
 
     @Override
     public void update(Producto entity) {
-        String sql="UPDATE productos SET codigo_producto = ?, categoria_id = ?, descripcion_producto = ?, marca_producto = ?, procedencia_producto = ?, peso_producto = ?, stock_inicial_producto = ?, stock_actual_producto = ?, stock_minimo_producto = ?,estado_producto = ?,usuario_id = ? WHERE id_producto = ?";
+        String sql="UPDATE entitys SET codigo_entity = ?, categoria_id = ?, descripcion_entity = ?, marca_entity = ?, procedencia_entity = ?, peso_entity = ?, stock_inicial_entity = ?, stock_actual_entity = ?, stock_minimo_entity = ?,estado_entity = ?,usuario_id = ? WHERE id_entity = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)){
             stmt.setString(1, entity.getCodigo());
             stmt.setInt(2, entity.getCategoria().getId());
@@ -126,7 +124,7 @@ public class ProductoDAO implements IDAO<Producto, Integer>{
 
     @Override
     public void delete(Integer id) {
-        String sql = "DELETE FROM productos WHERE id_producto = ?";
+        String sql = "DELETE FROM entitys WHERE id_entity = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, id);
             stmt.executeUpdate();
@@ -136,7 +134,7 @@ public class ProductoDAO implements IDAO<Producto, Integer>{
     }
     
     public int contarPorCategoria(Integer categoriaId) {
-        String sql = "SELECT COUNT(*) FROM productos WHERE categoria_id = ?";
+        String sql = "SELECT COUNT(*) FROM entitys WHERE categoria_id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, categoriaId);
             ResultSet rs = stmt.executeQuery();

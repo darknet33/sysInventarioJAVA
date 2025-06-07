@@ -2,12 +2,21 @@ package sistemainventario.dto;
 
 
 public class PermisoDTO {
+    private int id;
     private String modulo;
     private boolean estado;
 
     public PermisoDTO() {
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+        
     public String getModulo() {
         return modulo;
     }

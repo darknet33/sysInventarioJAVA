@@ -184,6 +184,9 @@
                 </Property>
                 <Property name="iconTextGap" type="int" value="50"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnReportesMouseClicked"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="btnEntradas">
               <Properties>
@@ -253,6 +256,9 @@
                 </Property>
                 <Property name="iconTextGap" type="int" value="50"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnSetupMouseClicked"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="btnCerrarSesion">
               <Properties>
@@ -296,6 +302,9 @@
                 <Property name="iconTextGap" type="int" value="50"/>
                 <Property name="opaque" type="boolean" value="true"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnInicioMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

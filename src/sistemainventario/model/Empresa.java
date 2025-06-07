@@ -1,15 +1,15 @@
 package sistemainventario.model;
 
 public class Empresa {
-    protected int Id;
-    protected String Nombre;
-    protected String Nit;
-    protected String Representante;
-    protected String Direccion;
-    protected String Celular;
-    protected String Email;
-    protected String Tipo;
-    protected byte[] Logo;
+    private int Id;
+    private String Nombre;
+    private String Nit;
+    private String Representante;
+    private String Direccion;
+    private String Celular;
+    private String Email;
+    private String Tipo;
+    private byte[] Logo;
 
     public Empresa() {
     }

@@ -11,7 +11,8 @@ import sistemainventario.util.Mensajes;
 
 public class UsuarioDAO implements IDAO<Usuario,Integer>{
     private final Connection conn;
-
+    private final RolDAO rolDAO = new RolDAO();
+    
     public UsuarioDAO() {
         this.conn = ConexionDAO.getConexion();
     }
@@ -25,14 +26,12 @@ public class UsuarioDAO implements IDAO<Usuario,Integer>{
         entity.setNombres(rs.getString("nombres_usuario"));
         entity.setApellidos(rs.getString("apellidos_usuario"));
         entity.setCargo(rs.getString("cargo_usuario"));
-
-        RolDAO rolDAO = new RolDAO();
-        Rol rol=rolDAO.getById(rs.getInt("rol_id"));
-        entity.setRol(rol);
-
         entity.setFechaRegistro(rs.getTimestamp("f_registro_usuario"));
         entity.setFechaActualizado(rs.getTimestamp("f_actualizado_usuario"));
         entity.setEstado(rs.getBoolean("estado_usuario"));
+        
+        Rol rol=rolDAO.getById(rs.getInt("rol_id"));
+        entity.setRol(rol);
 
         return entity;
     }

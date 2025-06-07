@@ -28,8 +28,7 @@ public class CategoriaController {
         } catch (Exception e) {
             Mensajes.errorValidaciones(e);
             return false;
-        }
-        
+        }        
     }
     
     public boolean actulizarCategoria(CategoriaDTO categoria){

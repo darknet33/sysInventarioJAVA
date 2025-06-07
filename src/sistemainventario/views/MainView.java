@@ -86,6 +86,11 @@ public final class MainView extends javax.swing.JFrame {
         btnReportes.setText("Reportes");
         btnReportes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnReportes.setIconTextGap(50);
+        btnReportes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnReportesMouseClicked(evt);
+            }
+        });
 
         btnEntradas.setBackground(new java.awt.Color(0, 102, 204));
         btnEntradas.setFont(new java.awt.Font("Segoe UI Black", 1, 20)); // NOI18N
@@ -120,6 +125,11 @@ public final class MainView extends javax.swing.JFrame {
         btnSetup.setText("Setup");
         btnSetup.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnSetup.setIconTextGap(50);
+        btnSetup.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSetupMouseClicked(evt);
+            }
+        });
 
         btnCerrarSesion.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         btnCerrarSesion.setForeground(new java.awt.Color(255, 255, 255));
@@ -141,6 +151,11 @@ public final class MainView extends javax.swing.JFrame {
         btnInicio.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnInicio.setIconTextGap(50);
         btnInicio.setOpaque(true);
+        btnInicio.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnInicioMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jpMenuLayout = new javax.swing.GroupLayout(jpMenu);
         jpMenu.setLayout(jpMenuLayout);
@@ -306,8 +321,10 @@ public final class MainView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProductosMouseClicked
-        this.dispose();
-        new ProductosView().setVisible(true);
+        if (tienePermiso("productos")){
+            this.dispose();
+            new ProductosView().setVisible(true);
+        }
     }//GEN-LAST:event_btnProductosMouseClicked
 
     private void btnCerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarSesionMouseClicked
@@ -315,13 +332,17 @@ public final class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCerrarSesionMouseClicked
 
     private void btnEntradasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEntradasMouseClicked
-        this.dispose();
-        new EntradasView().setVisible(true);
+        if (tienePermiso("entradas")){
+            this.dispose();
+            new EntradasView().setVisible(true);
+        }
     }//GEN-LAST:event_btnEntradasMouseClicked
 
     private void btnSalidasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalidasMouseClicked
-        this.dispose();
-        new SalidasView().setVisible(true);
+        if (tienePermiso("salidas")){
+            this.dispose();
+            new SalidasView().setVisible(true);   
+        }
     }//GEN-LAST:event_btnSalidasMouseClicked
 
     private void btnMinimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizarMouseClicked
@@ -331,6 +352,24 @@ public final class MainView extends javax.swing.JFrame {
     private void btnCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarMouseClicked
         salir();
     }//GEN-LAST:event_btnCerrarMouseClicked
+
+    private void btnInicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInicioMouseClicked
+        if (tienePermiso("inicio")){
+            
+        }
+    }//GEN-LAST:event_btnInicioMouseClicked
+
+    private void btnReportesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportesMouseClicked
+        if (tienePermiso("reportes")){
+            this.dispose();
+        }
+    }//GEN-LAST:event_btnReportesMouseClicked
+
+    private void btnSetupMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSetupMouseClicked
+        if (tienePermiso("setup")){
+            this.dispose();            
+        }
+    }//GEN-LAST:event_btnSetupMouseClicked
 
     public void cargaDatos(){
         UsuarioDTO u=Sesion.getUsuario();
@@ -349,6 +388,19 @@ public final class MainView extends javax.swing.JFrame {
             new LoginView().setVisible(true);
         }
         
+    }
+
+    public boolean tienePermiso(String modulo){        
+        if (Sesion.getPermiso(modulo)!=null){
+            if (Sesion.getPermiso(modulo).isEstado()){
+                return true;
+            }else{
+                Mensajes.advertencia("Modulo en mantenimiento");
+                return false;
+            }
+        }
+        Mensajes.advertencia("No tiene permiso para ingresar a este modulo");
+        return false;
     }
     
     public void minimizar(){
